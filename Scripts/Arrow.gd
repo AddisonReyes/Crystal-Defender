@@ -32,7 +32,6 @@ func _on_timer_timeout():
 
 func _on_area_2d_body_entered(body):
 	if body is Fae1:
-		print("OK")
 		body.take_damage(damage)
 		queue_free()
 

@@ -6,7 +6,7 @@ class_name Crystal
 var healthBar
 
 #Atributes
-var maxHealth = 100
+var maxHealth = 500
 var health = maxHealth
 
 var alive = true
@@ -26,9 +26,14 @@ func _ready():
 
 func _process(delta):
 	update_health()
+	
+	if health <= 0 and alive:
+		death()
 
 
 func update_health():
+	$HealthBar/Label.text = str(maxHealth) + " / " + str(health)
+	
 	if health >= maxHealth:
 		health = maxHealth
 		
@@ -41,16 +46,16 @@ func update_health():
 		healthBar.visible = true
 
 
+func death():
+	$PlayerCristal.play("Death")
+	alive = false
+
+
 func take_damage(damage):
 	if alive:
 		self.modulate = damageColor
+		$Recovery.start()
 		health -= damage
-		
-		if health <= 0:
-			return true
-		
-		else:
-			return false
 
 
 func heals(healPoints):
@@ -62,4 +67,8 @@ func heals(healPoints):
 
 
 func _on_heal_timer_timeout():
+	self.modulate = defaultColor
+
+
+func _on_recovery_timeout():
 	self.modulate = defaultColor

@@ -3,6 +3,10 @@ class_name Fae1
 
 
 #Objects
+const CrystalPath = preload("res://Scenes/crystalHeart.tscn")
+const HeartPath = preload("res://Scenes/heart.tscn")
+var rng = RandomNumberGenerator.new()
+
 var healthBar
 var crystal
 var player
@@ -14,10 +18,10 @@ var maxHealth = 30
 var health = maxHealth
 var damage = 10
 
-const SPEED = 190
-var state = "walk"
+const SPEED = 260
+var state = "Walk"
 
-var heart_drop = 0.2
+var heart_drop = 0.15
 var canAttack = false
 var attackCooldown = true
 
@@ -38,14 +42,36 @@ func _ready():
 
 
 func _physics_process(delta):
-	var target_position = (objetive.position - position).normalized()
 	update_health()
-		
-	if position.distance_to(objetive.position) > 10:
-		var new_position = Vector2(target_position.x, target_position.y)
-		velocity = Vector2(new_position * SPEED)
+	
+	$RayCast2D.look_at(crystal.position)
+	$RayCast2D2.look_at(player.position)
+	
+	if $RayCast2D2.is_colliding() and objetive != crystal:
+		if $RayCast2D2.get_collider() is Player:
+			objetive = player
 			
-		move_and_slide()
+	if $RayCast2D.is_colliding():
+		if $RayCast2D.get_collider() is Crystal:
+			objetive = crystal
+	
+	if crystal.alive == false:
+		objetive = player
+	
+	if state == "Attack":
+		if canAttack and attackCooldown:
+			objetive.take_damage(damage)
+			attackCooldown = false
+			$Timer.start()
+	
+	if state == "Walk":
+		var target_position = (objetive.position - position).normalized()
+		
+		if position.distance_to(objetive.position) > 3:
+			var new_position = Vector2(target_position.x, target_position.y)
+			velocity = Vector2(new_position * SPEED)
+				
+			move_and_slide()
 
 
 func take_damage(damage):
@@ -53,15 +79,24 @@ func take_damage(damage):
 		death()
 
 	self.modulate = damageColor
+	$Recovery.start()
 	health -= damage
 
 
 func death():
-	#var num = rng.randf_range(0.0, 1.0)
-	#if num < heart_drop:
-	#	var new_item = HeartPath.instantiate()
-	#	new_item.position = self.position
-	#	get_parent().add_child(new_item)
+	var num = rng.randf_range(0.0, 1.0)
+	if num < heart_drop:
+		var heartNum = rng.randi_range(0, 1)
+		var new_item
+		
+		if heartNum == 0:
+			new_item = HeartPath.instantiate()
+		else:
+			new_item = CrystalPath.instantiate()
+		
+		new_item.position = self.position
+		get_parent().get_node("Items").add_child(new_item)
+	
 	queue_free()
 
 
@@ -78,20 +113,16 @@ func update_health():
 		healthBar.visible = true
 
 
-func _on_area_2d_body_entered(body):
-	if body is Player:
-		objetive = player
-	
-	if body is Crystal:
-		objetive = crystal
-
-
 func _on_attack_area_2d_body_entered(body):
 	if body is Player or body is Crystal:
-		if attackCooldown:
-			body.take_damage(damage)
-			attackCooldown = false
-			$Timer.start()
+		state = "Attack"
+		canAttack = true
+
+
+func _on_attack_area_2d_body_exited(body):
+	if body is Player or body is Crystal:
+		state = "Walk"
+		canAttack = false
 
 
 func _on_timer_timeout():
@@ -100,3 +131,11 @@ func _on_timer_timeout():
 
 func _on_recovery_timeout():
 	self.modulate = defaultColor
+
+
+func _on_attack_area_2d_mouse_entered():
+	healthBar.visible = true
+
+
+func _on_attack_area_2d_mouse_exited():
+	healthBar.visible = false

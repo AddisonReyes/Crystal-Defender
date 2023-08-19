@@ -9,8 +9,8 @@ var healthBar
 
 #Atributes
 var damage = 10
-var fireRate = 0.9
-var maxHealth = 100
+var fireRate = 0.6
+var maxHealth = 60
 var health = maxHealth
 
 const PIXELS_TO_MOVE = 1.6
@@ -100,19 +100,12 @@ func singleShoot():
 func take_damage(damage):
 	if alive:
 		self.modulate = damageColor
-		health -= damage
-		
-		if health <= 0:
-			return true
-		
-		else:
-			return false
-		
 		$Timers/Recovery.start()
+		health -= damage
 
 
 func death():
-	#$Arco.hide()
+	$Bow.hide()
 	$Player.play("Death")
 	alive = false
 
@@ -164,8 +157,7 @@ func update_health():
 	healthBar.value = health
 	
 	if health >= maxHealth:
-		#healthBar.visible = false
-		pass
+		healthBar.visible = false
 	
 	else:
 		healthBar.visible = true
