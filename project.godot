@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Mini Jam 139, Fae"
+run/main_scene="res://Scenes/Game.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -22,6 +23,7 @@ aseprite_executable_path="C:/Program Files (x86)/Steam/steamapps/common/Aseprite
 
 window/size/viewport_width=960
 window/size/viewport_height=540
+window/size/mode=2
 
 [editor_plugins]
 

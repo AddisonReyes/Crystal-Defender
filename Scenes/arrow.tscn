@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://k87bbxii4r1u"]
+
+[ext_resource type="Script" path="res://Scripts/Arrow.gd" id="1_fpuhx"]
+[ext_resource type="PackedScene" uid="uid://h86gxdxfdn2i" path="res://Sprites/Arrow.aseprite" id="2_aine5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh660"]
+size = Vector2(27, 11.5664)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_su5ns"]
+size = Vector2(29, 14)
+
+[node name="Arrow" type="CharacterBody2D"]
+collision_layer = 32768
+collision_mask = 32770
+script = ExtResource("1_fpuhx")
+
+[node name="Arrow" parent="." instance=ExtResource("2_aine5")]
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, -0.754131)
+scale = Vector2(1, 1.08)
+shape = SubResource("RectangleShape2D_yh660")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.5, -1)
+shape = SubResource("RectangleShape2D_su5ns")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="_Gravity_" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="_Gravity_" to="." method="_on__gravity__timeout"]
