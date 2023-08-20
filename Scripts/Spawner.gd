@@ -1,21 +1,30 @@
 extends Node2D
 
 
+#Objects
 var rng = RandomNumberGenerator.new()
+var player
 
 #Preloads
 const fae1 = preload("res://Scenes/fae_1.tscn")
+const fae2 = preload("res://Scenes/fae_2.tscn")
+const fae3 = preload("res://Scenes/fae_3.tscn")
 
 #Instances
-var normalFae = fae1.instantiate()
+var fae1_instance = fae1.instantiate()
+var fae2_instance = fae2.instantiate()
+var fae3_instance = fae3.instantiate()
 
+var dificulty = 1
 
 func _ready():
+	player = get_parent().get_node("Player")
 	$Timer.start()
 
 
 func _process(delta):
-	pass
+	if player.FaeKilled == 20:
+		dificulty += 1
 
 
 func _get_spawn_position():
@@ -47,9 +56,17 @@ func _get_spawn_position():
 
 
 func _on_timer_timeout():
-	var newEnemy = normalFae.duplicate()
+	var Num = rng.randi_range(0, dificulty)
+	var newEnemy
+		
+	if Num == 0:
+		newEnemy = fae1_instance.duplicate()
+	elif Num == 1:
+		newEnemy = fae2_instance.duplicate()
+	else:
+		newEnemy = fae3_instance.duplicate()
+
 	newEnemy.position = _get_spawn_position()
 	
 	get_parent().add_child(newEnemy)
-	
 	$Timer.start()

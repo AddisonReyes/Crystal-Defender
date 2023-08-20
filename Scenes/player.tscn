@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://de74jipsmjoxb"]
+[gd_scene load_steps=7 format=3 uid="uid://de74jipsmjoxb"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4wtbe"]
 [ext_resource type="PackedScene" uid="uid://7yqbsnibq45l" path="res://Sprites/Player.aseprite" id="2_n0ka6"]
 [ext_resource type="PackedScene" uid="uid://cw8ev3ytdtau2" path="res://Sprites/Bow.aseprite" id="3_4qxt2"]
+[ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="3_twptl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ot13"]
 size = Vector2(20, 30)
@@ -12,16 +13,16 @@ size = Vector2(30, 21)
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 3
-collision_mask = 16385
+collision_mask = 16387
 script = ExtResource("1_4wtbe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 texture_filter = 1
-zoom = Vector2(1.2, 1.2)
 limit_left = -2390
-limit_top = -1000
+limit_top = 0
 limit_right = 2390
 limit_bottom = 1000
+editor_draw_limits = true
 
 [node name="Player" parent="." instance=ExtResource("2_n0ka6")]
 position = Vector2(-1.19209e-07, 5.96046e-08)
@@ -35,12 +36,23 @@ shape = SubResource("RectangleShape2D_8ot13")
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_xjj3f")
 
+[node name="Label" type="Label" parent="."]
+offset_left = -26.0
+offset_top = -127.0
+offset_right = 26.0
+offset_bottom = -80.0
+theme_override_fonts/font = ExtResource("3_twptl")
+theme_override_font_sizes/font_size = 46
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HealthBar" type="ProgressBar" parent="."]
 modulate = Color(0.447059, 1, 0.47451, 1)
-offset_left = -34.0
-offset_top = -47.0
-offset_right = 34.0
-offset_bottom = -36.0
+offset_left = -41.0
+offset_top = -53.0
+offset_right = 41.0
+offset_bottom = -39.0
 show_percentage = false
 
 [node name="Timers" type="Node2D" parent="."]
@@ -52,6 +64,8 @@ wait_time = 0.4
 
 [node name="Recovery" type="Timer" parent="Timers"]
 wait_time = 0.5
+
+[node name="ReviveTimer" type="Timer" parent="Timers"]
 
 [node name="Bow" type="Node2D" parent="."]
 
@@ -68,3 +82,4 @@ position = Vector2(90, 0)
 [connection signal="timeout" from="Timers/HealTimer" to="." method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Timers/FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="Timers/Recovery" to="." method="_on_recovery_timeout"]
+[connection signal="timeout" from="Timers/ReviveTimer" to="." method="_on_revive_timer_timeout"]

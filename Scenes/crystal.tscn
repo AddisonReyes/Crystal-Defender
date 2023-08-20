@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxhf8cem57cse"]
+[gd_scene load_steps=5 format=3 uid="uid://cxhf8cem57cse"]
 
 [ext_resource type="PackedScene" uid="uid://e42fmrqn5kup" path="res://Sprites/PlayerCristal.aseprite" id="1_0vi3a"]
 [ext_resource type="Script" path="res://Scripts/crystal.gd" id="1_axjf5"]
+[ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="3_6rs28"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uybs"]
 size = Vector2(53.3333, 149.333)
@@ -13,30 +14,33 @@ collision_mask = 16384
 script = ExtResource("1_axjf5")
 
 [node name="PlayerCristal" parent="." instance=ExtResource("1_0vi3a")]
-position = Vector2(1, 2.27374e-13)
+position = Vector2(0, -26.6667)
 scale = Vector2(2.5, 2.5)
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.27157e-06, 0)
+position = Vector2(0, -21.3333)
 shape = SubResource("RectangleShape2D_5uybs")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 modulate = Color(0.447059, 1, 0.47451, 1)
-offset_left = -148.0
-offset_top = -115.0
-offset_right = 146.0
-offset_bottom = -76.0
+offset_left = -160.0
+offset_top = -133.333
+offset_right = 160.0
+offset_bottom = -103.333
 show_percentage = false
 
 [node name="Label" type="Label" parent="HealthBar"]
 layout_mode = 0
-offset_left = 9.33333
-offset_top = 6.33333
-offset_right = 120.333
-offset_bottom = 32.3333
+offset_left = 5.33333
+offset_top = -21.0
+offset_right = 198.333
+offset_bottom = 7.0
+theme_override_fonts/font = ExtResource("3_6rs28")
+theme_override_font_sizes/font_size = 26
 text = "99999 / 99999"
-vertical_alignment = 1
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="HealTimer" type="Timer" parent="."]
 

@@ -1,33 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://k87bbxii4r1u"]
+[gd_scene load_steps=5 format=3 uid="uid://by3yrxctt1phl"]
 
-[ext_resource type="Script" path="res://Scripts/Arrow.gd" id="1_fpuhx"]
-[ext_resource type="PackedScene" uid="uid://h86gxdxfdn2i" path="res://Sprites/Arrow.aseprite" id="2_aine5"]
+[ext_resource type="Script" path="res://Scripts/CrystalProyectile.gd" id="1_17p0y"]
+[ext_resource type="PackedScene" uid="uid://b3xc4ax1u4nml" path="res://Sprites/CrystalProyectile.aseprite" id="2_3miwk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh660"]
-size = Vector2(27, 11.5664)
+size = Vector2(22, 8.33333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su5ns"]
-size = Vector2(29, 14)
+size = Vector2(24, 11)
 
-[node name="Arrow" type="CharacterBody2D"]
-collision_layer = 32768
-collision_mask = 32768
-script = ExtResource("1_fpuhx")
+[node name="CrystalP" type="CharacterBody2D"]
+collision_layer = 16386
+collision_mask = 16386
+script = ExtResource("1_17p0y")
 
-[node name="Arrow" parent="." instance=ExtResource("2_aine5")]
-scale = Vector2(1.5, 1.5)
+[node name="CrystalProyectile" parent="." instance=ExtResource("2_3miwk")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, -0.754131)
+position = Vector2(0, 0.5)
 scale = Vector2(1, 1.08)
 shape = SubResource("RectangleShape2D_yh660")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 32769
-collision_mask = 32769
+collision_layer = 16387
+collision_mask = 16387
+collision_priority = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(2.5, -1)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_su5ns")
 
 [node name="Timer" type="Timer" parent="."]

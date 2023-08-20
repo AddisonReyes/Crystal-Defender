@@ -31,11 +31,10 @@ func _on_timer_timeout():
 
 
 func _on_area_2d_body_entered(body):
-	if body is Fae1 or body is Fae2 or body is Fae3:
+	if body is Player or body is Crystal:
 		body.take_damage(damage)
 		queue_free()
 
 
 func _on__gravity__timeout():
 	arrowVelocity = Vector2(arrowVelocity.x, arrowVelocity.y + gravityForce)
-	speed -= gravityForce

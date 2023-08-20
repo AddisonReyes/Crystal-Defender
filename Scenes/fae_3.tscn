@@ -1,30 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjv01cu3spgw1"]
+[gd_scene load_steps=5 format=3 uid="uid://c6bg5q2jata6v"]
 
-[ext_resource type="Script" path="res://Scripts/Fae1.gd" id="1_da5pv"]
-[ext_resource type="PackedScene" uid="uid://5gnjqmk828vm" path="res://Sprites/Fae1.aseprite" id="2_yhncq"]
+[ext_resource type="Script" path="res://Scripts/Fae3.gd" id="1_rm57v"]
+[ext_resource type="PackedScene" uid="uid://cikvq4hmecx2i" path="res://Sprites/Fae3.aseprite" id="2_cjo0j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwmpu"]
 size = Vector2(26, 28)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u5xin"]
-radius = 42.0119
+radius = 304.0
 
-[node name="Fae1" type="CharacterBody2D"]
-collision_layer = 32769
-collision_mask = 32769
+[node name="Fae3" type="CharacterBody2D"]
+collision_layer = 32772
+collision_mask = 32772
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_da5pv")
+script = ExtResource("1_rm57v")
 
-[node name="Fae1" parent="." instance=ExtResource("2_yhncq")]
-position = Vector2(-2.38419e-07, -4.76837e-07)
+[node name="Fae3" parent="." instance=ExtResource("2_cjo0j")]
 scale = Vector2(2.5, 2.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dwmpu")
 
 [node name="AttackArea2D" type="Area2D" parent="."]
-collision_mask = 16385
+collision_layer = 3
+collision_mask = 16387
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
 shape = SubResource("CircleShape2D_u5xin")
@@ -32,10 +32,10 @@ debug_color = Color(0.980392, 0, 0.392157, 0.419608)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 modulate = Color(0.447059, 1, 0.47451, 1)
-offset_left = -34.0
-offset_top = -43.0
-offset_right = 34.0
-offset_bottom = -33.0
+offset_left = -40.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -38.0
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]
@@ -45,12 +45,32 @@ wait_time = 1.6
 wait_time = 0.5
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(266, -52)
+target_position = Vector2(376, -40)
 collision_mask = 16385
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
-target_position = Vector2(476, 24)
+target_position = Vector2(504, -8)
 collision_mask = 16385
+
+[node name="magic" type="Node2D" parent="."]
+
+[node name="position3" type="Marker2D" parent="magic"]
+position = Vector2(32, 16)
+
+[node name="position2" type="Marker2D" parent="magic"]
+position = Vector2(48, 0)
+
+[node name="position1" type="Marker2D" parent="magic"]
+position = Vector2(32, -16)
+
+[node name="direction1" type="Marker2D" parent="magic"]
+position = Vector2(88, -24)
+
+[node name="direction2" type="Marker2D" parent="magic"]
+position = Vector2(96, 0)
+
+[node name="direction3" type="Marker2D" parent="magic"]
+position = Vector2(88, 24)
 
 [connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
 [connection signal="body_exited" from="AttackArea2D" to="." method="_on_attack_area_2d_body_exited"]

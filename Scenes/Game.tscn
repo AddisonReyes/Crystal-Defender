@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbki1rosgicfn"]
+[gd_scene load_steps=12 format=3 uid="uid://bbki1rosgicfn"]
 
 [ext_resource type="PackedScene" uid="uid://b5uuqbq3qpqvo" path="res://Sprites/Background.aseprite" id="1_q5s2u"]
 [ext_resource type="Texture2D" uid="uid://dgyu3kgcktgv2" path="res://Sprites/Tilemap.png" id="2_bykcc"]
@@ -54,7 +54,10 @@ physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_kwyh7")
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3dlf"]
+size = Vector2(34, 456)
+
+[node name="Game" type="Node2D"]
 
 [node name="Background" parent="." instance=ExtResource("1_q5s2u")]
 position = Vector2(0, 271)
@@ -67,18 +70,17 @@ layer_0/tile_data = PackedInt32Array(589848, 0, 0, 589847, 0, 0, 589846, 0, 0, 5
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="Crystal" parent="." instance=ExtResource("3_mpkvw")]
-position = Vector2(0, 352)
-
 [node name="Player" parent="." instance=ExtResource("4_ema1y")]
-position = Vector2(-143, 520)
+position = Vector2(0, 720)
+
+[node name="Timer" type="Timer" parent="."]
 
 [node name="Spawner" type="Node2D" parent="."]
 position = Vector2(2464, 608)
 script = ExtResource("5_xo4ya")
 
 [node name="Timer" type="Timer" parent="Spawner"]
-wait_time = 3.0
+wait_time = 3.5
 
 [node name="1" type="Marker2D" parent="Spawner"]
 position = Vector2(0, -64)
@@ -102,5 +104,20 @@ position = Vector2(-4928, 64)
 
 [node name="8" type="Marker2D" parent="Spawner"]
 position = Vector2(-4928, 128)
+
+[node name="Limits" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Limits"]
+position = Vector2(-2408, 624)
+shape = SubResource("RectangleShape2D_g3dlf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limits"]
+position = Vector2(2407, 612)
+shape = SubResource("RectangleShape2D_g3dlf")
+
+[node name="Crystal" parent="." instance=ExtResource("3_mpkvw")]
+position = Vector2(0, 432)
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

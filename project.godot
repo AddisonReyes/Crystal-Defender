@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Mini Jam 139, Fae"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Scenes/menu.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
+boot_splash/bg_color=Color(0.0823529, 0.00784314, 0.117647, 1)
+boot_splash/image="res://Sprites/intro.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=2000
 
 [aseprite_importers]
 
@@ -21,7 +26,13 @@ aseprite_executable_path="C:/Program Files (x86)/Steam/steamapps/common/Aseprite
 
 [display]
 
+window/size/viewport_width=1600
+window/size/viewport_height=900
 window/size/mode=2
+window/size/resizable=false
+window/size/window_width_override=960
+window/size/window_height_override=540
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

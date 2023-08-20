@@ -4,21 +4,28 @@ class_name Player
 
 #Objects
 const ArrowPath = preload("res://Scenes/arrow.tscn")
+var crystal
 
 var healthBar
 
 #Atributes
-var damage = 10
+var damage = 15
 var fireRate = 0.6
 var maxHealth = 60
 var health = maxHealth
 
 const PIXELS_TO_MOVE = 1.6
+var START_POSITION
 const SPEED = 250.0
 
 var lookingRight = true
 var can_shoot = true
+var reviveTime = 3
 var alive = true
+
+#Stats
+var FaeKilled = 0
+var Coins = 0
 
 #Colors
 var damageColor = Color(1, 0, 0, 1)
@@ -27,10 +34,15 @@ var defaultColor = Color(1, 1, 1, 1)
 
 
 func _ready():
+	crystal = get_parent().get_node("Crystal") 
+	
+	$Label.visible = false
 	$Player.play("Idle")
 	
 	healthBar = $HealthBar
 	healthBar.max_value = maxHealth
+	
+	START_POSITION = self.global_position
 
 
 func _physics_process(delta):
@@ -52,6 +64,9 @@ func _physics_process(delta):
 			singleShoot()
 		
 		move_and_slide()
+		
+	else:
+		$Label.text = str(int(round($Timers/ReviveTimer.get_time_left())))
 
 
 func movement():
@@ -90,7 +105,7 @@ func singleShoot():
 	arrow.position = $Bow/position.global_position
 	arrow.direction = $Bow/direction.global_position
 	arrow.arrowVelocity = $Bow/direction.global_position - arrow.position
-	arrow.damage = damage * 2
+	arrow.damage = damage
 	
 	can_shoot = false
 	$Timers/FireRate.wait_time = fireRate
@@ -108,6 +123,14 @@ func death():
 	$Bow.hide()
 	$Player.play("Death")
 	alive = false
+	
+	if crystal.alive:
+		$Label.visible = true
+		$Timers/ReviveTimer.wait_time = reviveTime
+		$Timers/ReviveTimer.start()
+		
+		if reviveTime <= 9:
+			reviveTime += 1
 
 
 func heals(healPoints):
@@ -173,3 +196,15 @@ func _on_fire_rate_timeout():
 
 func _on_recovery_timeout():
 	self.modulate = defaultColor
+
+
+func _on_revive_timer_timeout():
+	if alive == false and crystal.alive:
+		$Label.visible = false
+		$Player.play("Idle")
+		$Bow.show()
+		
+		self.position = START_POSITION
+		
+		health = maxHealth
+		alive = true

@@ -1,8 +1,9 @@
 extends CharacterBody2D
-class_name Fae1
+class_name Fae2
 
 
 #Objects
+const ProyectilePath = preload("res://Scenes/crystalProyectile.tscn")
 const CrystalPath = preload("res://Scenes/crystalHeart.tscn")
 const HeartPath = preload("res://Scenes/heart.tscn")
 const CoinPath = preload("res://Scenes/Coin.tscn")
@@ -15,14 +16,14 @@ var player
 var objetive
 
 #Atributes
-var maxHealth = 30
+var maxHealth = 25
 var health = maxHealth
-var damage = 10
+var damage = 15
 
 const SPEED = 260
 var state = "Walk"
 
-var item_drop = 0.25
+var item_drop = 0.3
 var canAttack = false
 var attackCooldown = true
 
@@ -39,7 +40,7 @@ func _ready():
 	healthBar = $HealthBar
 	healthBar.max_value = maxHealth
 	
-	$Fae1.play("default")
+	$Fae2.play("default")
 
 
 func _physics_process(delta):
@@ -62,10 +63,15 @@ func _physics_process(delta):
 	elif crystal.alive == false:
 		objetive = player
 	
+	$magic.look_at(objetive.position)
+	if self.position.x <= objetive.position.x:
+		$Fae2.flip_h = true
+	else:
+		$Fae2.flip_h = false
 	
 	if state == "Attack" and objetive.alive:
 		if canAttack and attackCooldown:
-			objetive.take_damage(damage)
+			singleShoot()
 			attackCooldown = false
 			$Timer.start()
 	
@@ -77,6 +83,16 @@ func _physics_process(delta):
 			velocity = Vector2(new_position * SPEED)
 				
 			move_and_slide()
+
+
+func singleShoot():
+	var proyectile = ProyectilePath.instantiate()
+	get_parent().add_child(proyectile)
+	
+	proyectile.position = $magic/position.global_position
+	proyectile.direction = $magic/direction.global_position
+	proyectile.arrowVelocity = $magic/direction.global_position - proyectile.position
+	proyectile.damage = damage
 
 
 func take_damage(damage):
