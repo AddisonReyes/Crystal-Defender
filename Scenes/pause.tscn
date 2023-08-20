@@ -1,28 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://cydrxsjn3ea45"]
+[gd_scene load_steps=5 format=3 uid="uid://d23qsnmgxegk5"]
 
-[ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="1_8ygbk"]
-[ext_resource type="Script" path="res://Scripts/menu.gd" id="1_fvlys"]
-[ext_resource type="PackedScene" uid="uid://bccrnd75ajlpb" path="res://Sprites/Menu.aseprite" id="2_fok0r"]
+[ext_resource type="Script" path="res://Scripts/pause.gd" id="1_gbtgo"]
+[ext_resource type="Texture2D" uid="uid://djieqkn7qbyl7" path="res://Sprites/Menu.png" id="1_rybld"]
+[ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="2_cmqiw"]
+[ext_resource type="PackedScene" uid="uid://7yqbsnibq45l" path="res://Sprites/Player.aseprite" id="3_w1mkh"]
 
-[node name="Menu" type="Control"]
+[node name="Pause" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fvlys")
+script = ExtResource("1_gbtgo")
 
-[node name="Menu" parent="." instance=ExtResource("2_fok0r")]
-position = Vector2(912, 520)
+[node name="Menu" type="Sprite2D" parent="."]
+position = Vector2(656, 518)
 scale = Vector2(2, 2)
+texture = ExtResource("1_rybld")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 984.0
-offset_top = 376.0
-offset_right = 1472.0
-offset_bottom = 888.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = -256.0
+offset_right = 244.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -32,9 +41,10 @@ alignment = 1
 modulate = Color(1, 0.654902, 0.992157, 1)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.392157, 0.243137, 0.501961, 1)
-theme_override_fonts/font = ExtResource("1_8ygbk")
+theme_override_fonts/font = ExtResource("2_cmqiw")
 theme_override_font_sizes/font_size = 46
-text = "Play"
+text = "Resume
+"
 icon_alignment = 1
 vertical_icon_alignment = 0
 
@@ -42,19 +52,20 @@ vertical_icon_alignment = 0
 modulate = Color(1, 0.654902, 0.992157, 1)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.392157, 0.243137, 0.501961, 1)
-theme_override_fonts/font = ExtResource("1_8ygbk")
+theme_override_fonts/font = ExtResource("2_cmqiw")
 theme_override_font_sizes/font_size = 46
-text = "Fullscreen"
+text = "Fullscreen
+"
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Menu" type="Button" parent="MarginContainer/VBoxContainer"]
 modulate = Color(1, 0.654902, 0.992157, 1)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.392157, 0.243137, 0.501961, 1)
-theme_override_fonts/font = ExtResource("1_8ygbk")
+theme_override_fonts/font = ExtResource("2_cmqiw")
 theme_override_font_sizes/font_size = 46
-text = "Credits
+text = "Menu
 "
 icon_alignment = 1
 vertical_icon_alignment = 0
@@ -63,13 +74,22 @@ vertical_icon_alignment = 0
 modulate = Color(1, 0.654902, 0.992157, 1)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.392157, 0.243137, 0.501961, 1)
-theme_override_fonts/font = ExtResource("1_8ygbk")
+theme_override_fonts/font = ExtResource("2_cmqiw")
 theme_override_font_sizes/font_size = 46
 text = "Exit"
 icon_alignment = 1
 vertical_icon_alignment = 0
 
+[node name="Player" parent="." instance=ExtResource("3_w1mkh")]
+position = Vector2(112, 792)
+scale = Vector2(7, 7)
+
+[node name="Player2" parent="." instance=ExtResource("3_w1mkh")]
+position = Vector2(1488, 784)
+scale = Vector2(7, 7)
+flip_h = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

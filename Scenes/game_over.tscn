@@ -1,0 +1,161 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4n61n0n1bpha"]
+
+[ext_resource type="Script" path="res://GameOver.gd" id="1_0k6hu"]
+[ext_resource type="Texture2D" uid="uid://djieqkn7qbyl7" path="res://Sprites/Menu.png" id="2_1mwik"]
+[ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="3_6feq4"]
+[ext_resource type="PackedScene" uid="uid://7yqbsnibq45l" path="res://Sprites/Player.aseprite" id="4_dk728"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0k6hu")
+
+[node name="Menu" type="Sprite2D" parent="."]
+position = Vector2(696, 472)
+scale = Vector2(2, 2)
+texture = ExtResource("2_1mwik")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 984.0
+offset_top = 320.0
+offset_right = 1472.0
+offset_bottom = 832.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.392157, 0.243137, 0.501961, 1)
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 46
+text = "Play Again"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Menu" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.392157, 0.243137, 0.501961, 1)
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 46
+text = "Menu
+"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.392157, 0.243137, 0.501961, 1)
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 46
+text = "Exit"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="GameOver" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 2
+offset_left = 280.0
+offset_top = 88.0
+offset_right = 768.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 96
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FairiesKilled" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = 336.0
+offset_top = 200.0
+offset_right = 683.0
+offset_bottom = 256.0
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 56
+text = "Fairies Killed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="FairiesKilled"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = -288.0
+offset_top = 64.0
+offset_right = 640.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 56
+text = "999999999999999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinsCollected" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = 320.0
+offset_top = 376.0
+offset_right = 709.0
+offset_bottom = 432.0
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 56
+text = "Coins Collected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CoinsCollected"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = -272.0
+offset_top = 64.0
+offset_right = 656.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 56
+text = "999999999999999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimePlayed" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+offset_left = 320.0
+offset_top = 560.0
+offset_right = 709.0
+offset_bottom = 616.0
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 56
+text = "Time Played
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TimePlayed"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = -272.0
+offset_top = 64.0
+offset_right = 656.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("3_6feq4")
+theme_override_font_sizes/font_size = 56
+text = "999999999999999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" parent="." instance=ExtResource("4_dk728")]
+position = Vector2(1216, 328)
+scale = Vector2(7, 7)
+flip_h = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

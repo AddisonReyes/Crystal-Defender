@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://bqqqrxtn88fe3" path="res://Sprites/Coin.aseprite" id="1_pcrjs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uetww"]
-radius = 56.0
+radius = 40.0
 
 [node name="Coin" type="Node2D"]
 script = ExtResource("1_o888p")
 
 [node name="Coin" parent="." instance=ExtResource("1_pcrjs")]
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 
 [node name="Area2D" type="Area2D" parent="."]
 

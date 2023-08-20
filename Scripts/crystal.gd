@@ -6,7 +6,7 @@ class_name Crystal
 var healthBar
 
 #Atributes
-var maxHealth = 500
+var maxHealth = 1200
 var health = maxHealth
 
 var alive = true
@@ -38,12 +38,6 @@ func update_health():
 		health = maxHealth
 		
 	healthBar.value = health
-	
-	if health >= maxHealth:
-		healthBar.visible = false
-	
-	else:
-		healthBar.visible = true
 
 
 func death():

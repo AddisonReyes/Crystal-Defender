@@ -4,12 +4,14 @@ class_name Player
 
 #Objects
 const ArrowPath = preload("res://Scenes/arrow.tscn")
+const CoinPath = preload("res://Scenes/coin_flipping.tscn")
+var Coin = CoinPath.instantiate()
 var crystal
 
 var healthBar
 
 #Atributes
-var damage = 15
+var damage = 20
 var fireRate = 0.6
 var maxHealth = 60
 var health = maxHealth
@@ -18,13 +20,19 @@ const PIXELS_TO_MOVE = 1.6
 var START_POSITION
 const SPEED = 250.0
 
+var yFixed
+var InterfacePosition
+var canFlipCoins = true
 var lookingRight = true
+var multiShoot = false
 var can_shoot = true
 var reviveTime = 3
 var alive = true
 
 #Stats
 var FaeKilled = 0
+var CoinsCollected = 0
+
 var Coins = 0
 
 #Colors
@@ -43,15 +51,26 @@ func _ready():
 	healthBar.max_value = maxHealth
 	
 	START_POSITION = self.global_position
+	
+	yFixed = $Camera2D/InterfacePosition.global_position.y
+	InterfacePosition = Vector2($Camera2D/InterfacePosition.global_position.x, yFixed)
 
 
 func _physics_process(delta):
+	InterfacePosition = Vector2($Camera2D/InterfacePosition.global_position.x, yFixed)
 	update_health()
 	
 	if health <= 0 and alive:
 		death()
 	
+	if crystal.alive == false:
+		$Label.visible = false
+	
 	if alive:
+		if Input.is_key_pressed(KEY_T):
+			$Player.play("Dance")
+			return
+			
 		movement()
 		
 		if self.position.x <= get_global_mouse_position().x:
@@ -61,7 +80,10 @@ func _physics_process(delta):
 		
 		$Bow.look_at(get_global_mouse_position())
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
-			singleShoot()
+			shoot()
+		
+		if Input.is_key_pressed(KEY_SPACE) and canFlipCoins and Coins >= 1:
+			flipACoin()
 		
 		move_and_slide()
 		
@@ -98,15 +120,40 @@ func movement():
 		$Player.play("Idle")
 
 
-func singleShoot():
-	var arrow = ArrowPath.instantiate()
-	get_parent().add_child(arrow)
+func flipACoin():
+	Coins -= 1
+	canFlipCoins = false
+	var item = Coin.duplicate()
+	$Timers/CoinCooldown.start()
 	
-	arrow.position = $Bow/position.global_position
-	arrow.direction = $Bow/direction.global_position
-	arrow.arrowVelocity = $Bow/direction.global_position - arrow.position
-	arrow.damage = damage
-	
+	item.position = self.global_position
+	get_parent().add_child(item)
+
+
+func shoot():
+	if multiShoot:
+		var positions = [$Bow/position1.global_position, $Bow/position2.global_position, $Bow/position3.global_position]
+		var directions = [$Bow/direction1.global_position, $Bow/direction2.global_position, $Bow/direction3.global_position]
+		var arrowInst = ArrowPath.instantiate()
+		
+		for i in range(3):
+			var arrow = arrowInst.duplicate()
+			get_parent().add_child(arrow)
+			
+			arrow.position = positions[i]
+			arrow.direction = directions[i]
+			arrow.arrowVelocity = directions[i] - arrow.position
+			arrow.damage = damage
+		
+	else:
+		var arrow = ArrowPath.instantiate()
+		get_parent().add_child(arrow)
+		
+		arrow.position = $Bow/position2.global_position
+		arrow.direction = $Bow/direction2.global_position
+		arrow.arrowVelocity = $Bow/direction2.global_position - arrow.position
+		arrow.damage = damage
+		
 	can_shoot = false
 	$Timers/FireRate.wait_time = fireRate
 	$Timers/FireRate.start()
@@ -208,3 +255,7 @@ func _on_revive_timer_timeout():
 		
 		health = maxHealth
 		alive = true
+
+
+func _on_coin_cooldown_timeout():
+	canFlipCoins = true

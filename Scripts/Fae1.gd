@@ -15,14 +15,14 @@ var player
 var objetive
 
 #Atributes
-var maxHealth = 30
+var maxHealth = 60
 var health = maxHealth
 var damage = 10
 
 const SPEED = 260
 var state = "Walk"
 
-var item_drop = 0.25
+var item_drop = 0.3
 var canAttack = false
 var attackCooldown = true
 
@@ -91,17 +91,17 @@ func take_damage(damage):
 func death():
 	var num = rng.randf_range(0.0, 1.0)
 	if num < item_drop:
-		var itemNum = rng.randi_range(0, 2)
+		var itemNum = rng.randi_range(0, 4)
 		var new_item
 		
 		if itemNum == 0:
 			new_item = HeartPath.instantiate()
 			
 		elif itemNum == 1:
-			new_item = CoinPath.instantiate()
+			new_item = CrystalPath.instantiate()
 			
 		else:
-			new_item = CrystalPath.instantiate()
+			new_item = CoinPath.instantiate()
 		
 		new_item.position = self.position
 		get_parent().get_node("Items").add_child(new_item)

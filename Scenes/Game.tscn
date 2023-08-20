@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbki1rosgicfn"]
+[gd_scene load_steps=14 format=3 uid="uid://bbki1rosgicfn"]
 
+[ext_resource type="Script" path="res://Scenes/Game.gd" id="1_m8nbe"]
 [ext_resource type="PackedScene" uid="uid://b5uuqbq3qpqvo" path="res://Sprites/Background.aseprite" id="1_q5s2u"]
 [ext_resource type="Texture2D" uid="uid://dgyu3kgcktgv2" path="res://Sprites/Tilemap.png" id="2_bykcc"]
 [ext_resource type="PackedScene" uid="uid://cxhf8cem57cse" path="res://Scenes/crystal.tscn" id="3_mpkvw"]
 [ext_resource type="PackedScene" uid="uid://de74jipsmjoxb" path="res://Scenes/player.tscn" id="4_ema1y"]
+[ext_resource type="PackedScene" uid="uid://bnvd2hej1w33x" path="res://Scenes/interface.tscn" id="5_rporn"]
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="5_xo4ya"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4p8ep"]
@@ -58,6 +60,7 @@ sources/0 = SubResource("TileSetAtlasSource_kwyh7")
 size = Vector2(34, 456)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_m8nbe")
 
 [node name="Background" parent="." instance=ExtResource("1_q5s2u")]
 position = Vector2(0, 271)
@@ -70,17 +73,22 @@ layer_0/tile_data = PackedInt32Array(589848, 0, 0, 589847, 0, 0, 589846, 0, 0, 5
 
 [node name="Items" type="Node2D" parent="."]
 
+[node name="Crystal" parent="." instance=ExtResource("3_mpkvw")]
+position = Vector2(0, 432)
+
 [node name="Player" parent="." instance=ExtResource("4_ema1y")]
 position = Vector2(0, 720)
 
+[node name="PlayTimer" type="Timer" parent="."]
+
 [node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="Spawner" type="Node2D" parent="."]
 position = Vector2(2464, 608)
 script = ExtResource("5_xo4ya")
 
 [node name="Timer" type="Timer" parent="Spawner"]
-wait_time = 3.5
 
 [node name="1" type="Marker2D" parent="Spawner"]
 position = Vector2(0, -64)
@@ -117,7 +125,13 @@ shape = SubResource("RectangleShape2D_g3dlf")
 position = Vector2(2407, 612)
 shape = SubResource("RectangleShape2D_g3dlf")
 
-[node name="Crystal" parent="." instance=ExtResource("3_mpkvw")]
-position = Vector2(0, 432)
+[node name="Interface" parent="." instance=ExtResource("5_rporn")]
+offset_left = -800.0
+offset_top = 96.0
+offset_right = -800.0
+offset_bottom = 96.0
 
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="timeout" from="PlayTimer" to="." method="_on_play_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

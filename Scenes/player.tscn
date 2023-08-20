@@ -21,8 +21,11 @@ texture_filter = 1
 limit_left = -2390
 limit_top = 0
 limit_right = 2390
-limit_bottom = 1000
+limit_bottom = 800
 editor_draw_limits = true
+
+[node name="InterfacePosition" type="Marker2D" parent="Camera2D"]
+position = Vector2(-800, -728)
 
 [node name="Player" parent="." instance=ExtResource("2_n0ka6")]
 position = Vector2(-1.19209e-07, 5.96046e-08)
@@ -67,19 +70,34 @@ wait_time = 0.5
 
 [node name="ReviveTimer" type="Timer" parent="Timers"]
 
+[node name="CoinCooldown" type="Timer" parent="Timers"]
+
 [node name="Bow" type="Node2D" parent="."]
 
 [node name="Bow" parent="Bow" instance=ExtResource("3_4qxt2")]
 position = Vector2(21, 1)
 scale = Vector2(1.6, 1.6)
 
-[node name="position" type="Marker2D" parent="Bow"]
-position = Vector2(36, 0)
+[node name="position3" type="Marker2D" parent="Bow"]
+position = Vector2(24, 8)
 
-[node name="direction" type="Marker2D" parent="Bow"]
-position = Vector2(90, 0)
+[node name="position2" type="Marker2D" parent="Bow"]
+position = Vector2(32, 0)
+
+[node name="position1" type="Marker2D" parent="Bow"]
+position = Vector2(24, -8)
+
+[node name="direction1" type="Marker2D" parent="Bow"]
+position = Vector2(64, -10)
+
+[node name="direction2" type="Marker2D" parent="Bow"]
+position = Vector2(74, 0)
+
+[node name="direction3" type="Marker2D" parent="Bow"]
+position = Vector2(64, 10)
 
 [connection signal="timeout" from="Timers/HealTimer" to="." method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Timers/FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="Timers/Recovery" to="." method="_on_recovery_timeout"]
 [connection signal="timeout" from="Timers/ReviveTimer" to="." method="_on_revive_timer_timeout"]
+[connection signal="timeout" from="Timers/CoinCooldown" to="." method="_on_coin_cooldown_timeout"]
