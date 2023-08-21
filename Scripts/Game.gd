@@ -3,12 +3,13 @@ extends Node2D
 
 var clockStarted = false
 var firstRun = true
-var pause
 
 var timePlayed = 0
 
 
 func _ready():
+	$AudioStreamPlayer2D.play()
+	get_tree().paused = false
 	$PlayTimer.start()
 
 
@@ -18,7 +19,10 @@ func _process(delta):
 		firstRun = false
 		$Timer.start()
 	
-	pause = $Interface.pause
+	if get_tree().paused:
+		$Interface/Pause.show()
+	else:
+		$Interface/Pause.hide()
 
 
 func save_data():
@@ -40,7 +44,7 @@ func _on_timer_timeout():
 
 
 func _on_tree_entered():
-	if firstRun == false and pause == false:
+	if firstRun == false:
 		get_tree().reload_current_scene()
 
 
@@ -51,3 +55,7 @@ func _on_play_timer_timeout():
 		$Spawner.add_difficulty()
 	
 	$PlayTimer.start()
+
+
+func _on_background_2_finished():
+	$Background2.play()

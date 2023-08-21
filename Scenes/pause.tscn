@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d23qsnmgxegk5"]
+[gd_scene load_steps=4 format=3 uid="uid://d23qsnmgxegk5"]
 
 [ext_resource type="Script" path="res://Scripts/pause.gd" id="1_gbtgo"]
-[ext_resource type="Texture2D" uid="uid://djieqkn7qbyl7" path="res://Sprites/Menu.png" id="1_rybld"]
 [ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="2_cmqiw"]
-[ext_resource type="PackedScene" uid="uid://7yqbsnibq45l" path="res://Sprites/Player.aseprite" id="3_w1mkh"]
+[ext_resource type="AudioStream" uid="uid://jrw3fq03011b" path="res://Audio/clickButtom.wav" id="3_kepkv"]
 
 [node name="Pause" type="Control"]
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,11 +13,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gbtgo")
-
-[node name="Menu" type="Sprite2D" parent="."]
-position = Vector2(656, 518)
-scale = Vector2(2, 2)
-texture = ExtResource("1_rybld")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -80,14 +75,9 @@ text = "Exit"
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="Player" parent="." instance=ExtResource("3_w1mkh")]
-position = Vector2(112, 792)
-scale = Vector2(7, 7)
-
-[node name="Player2" parent="." instance=ExtResource("3_w1mkh")]
-position = Vector2(1488, 784)
-scale = Vector2(7, 7)
-flip_h = true
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_kepkv")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]

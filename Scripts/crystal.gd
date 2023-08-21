@@ -33,6 +33,7 @@ func _process(delta):
 
 func update_health():
 	$HealthBar/Label.text = str(maxHealth) + " / " + str(health)
+	healthBar.max_value = maxHealth
 	
 	if health >= maxHealth:
 		health = maxHealth
@@ -41,12 +42,14 @@ func update_health():
 
 
 func death():
+	$Death.play()
 	$PlayerCristal.play("Death")
 	alive = false
 
 
 func take_damage(damage):
 	if alive:
+		$Hurt.play()
 		self.modulate = damageColor
 		$Recovery.start()
 		health -= damage

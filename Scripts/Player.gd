@@ -11,7 +11,7 @@ var crystal
 var healthBar
 
 #Atributes
-var damage = 20
+var damage = 21
 var fireRate = 0.6
 var maxHealth = 60
 var health = maxHealth
@@ -58,6 +58,11 @@ func _ready():
 
 func _physics_process(delta):
 	InterfacePosition = Vector2($Camera2D/InterfacePosition.global_position.x, yFixed)
+	if InterfacePosition <= Vector2(-2394.998, -8):
+		InterfacePosition = Vector2(-2394.998, -8)
+	elif InterfacePosition >= Vector2(805.8309, -8):
+		InterfacePosition = Vector2(805.8309, -8)
+	
 	update_health()
 	
 	if health <= 0 and alive:
@@ -121,6 +126,8 @@ func movement():
 
 
 func flipACoin():
+	$CoinFlip.play()
+	
 	Coins -= 1
 	canFlipCoins = false
 	var item = Coin.duplicate()
@@ -131,6 +138,7 @@ func flipACoin():
 
 
 func shoot():
+	$bow.play()
 	if multiShoot:
 		var positions = [$Bow/position1.global_position, $Bow/position2.global_position, $Bow/position3.global_position]
 		var directions = [$Bow/direction1.global_position, $Bow/direction2.global_position, $Bow/direction3.global_position]
@@ -143,7 +151,7 @@ func shoot():
 			arrow.position = positions[i]
 			arrow.direction = directions[i]
 			arrow.arrowVelocity = directions[i] - arrow.position
-			arrow.damage = damage
+			arrow.damage = damage / 2
 		
 	else:
 		var arrow = ArrowPath.instantiate()
@@ -161,12 +169,15 @@ func shoot():
 
 func take_damage(damage):
 	if alive:
+		$Hurt.play()
 		self.modulate = damageColor
 		$Timers/Recovery.start()
 		health -= damage
 
 
 func death():
+	$Death.play()
+	
 	$Bow.hide()
 	$Player.play("Death")
 	alive = false
@@ -182,6 +193,7 @@ func death():
 
 func heals(healPoints):
 	if health < maxHealth:
+		$Heal.play()
 		health += healPoints
 		
 		self.modulate = healColor
@@ -221,6 +233,7 @@ func _player_movement():
 
 
 func update_health():
+	healthBar.max_value = maxHealth
 	if health >= maxHealth:
 		health = maxHealth
 		

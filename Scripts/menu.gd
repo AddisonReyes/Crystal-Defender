@@ -1,6 +1,12 @@
 extends Control
 
 
+func _ready():
+	$AudioStreamPlayer2D.play()
+	$Fae2.play("default")
+	$Fae3.play("default")
+
+
 func _process(delta):
 	pass
 
@@ -10,6 +16,7 @@ func _on_play_pressed():
 
 
 func _on_fullscreen_pressed():
+	$AudioStreamPlayer2D.play()
 	if DisplayServer.window_get_mode() == 0:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		return
@@ -21,3 +28,7 @@ func _on_fullscreen_pressed():
 
 func _on_exit_pressed():
 	get_tree().quit()
+
+
+func _on_credits_pressed():
+	get_tree().change_scene_to_file("res://Scenes/credits.tscn")

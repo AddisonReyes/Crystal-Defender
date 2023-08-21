@@ -2,6 +2,7 @@ extends Node2D
 
 
 var rng = RandomNumberGenerator.new()
+var collected = false
 var coins = 1
 
 
@@ -15,7 +16,15 @@ func _process(delta):
 
 
 func _on_area_2d_body_entered(body):
-	if body is Player:
+	if body is Player and collected == false:
+		$AudioStreamPlayer2D.play()
 		body.CoinsCollected += coins
 		body.Coins += coins
-		queue_free()
+		collected = true
+		
+		self.hide()
+		
+
+
+func _on_audio_stream_player_2d_finished():
+	queue_free()

@@ -1,0 +1,185 @@
+[gd_scene load_steps=6 format=3 uid="uid://j0lsij7r5epa"]
+
+[ext_resource type="Script" path="res://Scripts/Credits.gd" id="1_ahepd"]
+[ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="2_85s3j"]
+[ext_resource type="Texture2D" uid="uid://djieqkn7qbyl7" path="res://Sprites/Menu.png" id="2_b1d6e"]
+[ext_resource type="AudioStream" uid="uid://jrw3fq03011b" path="res://Audio/clickButtom.wav" id="3_76cyw"]
+[ext_resource type="PackedScene" uid="uid://ba3w4n1jggcry" path="res://Sprites/FortuneFae.aseprite" id="5_6g843"]
+
+[node name="Credits" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahepd")
+
+[node name="Menu" type="Sprite2D" parent="."]
+position = Vector2(816, 432)
+scale = Vector2(-1.98646, 2)
+texture = ExtResource("2_b1d6e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 1344.0
+offset_top = 736.0
+offset_right = 1536.0
+offset_bottom = 832.0
+alignment = 1
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+process_mode = 3
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.392157, 0.243137, 0.501961, 1)
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 46
+text = "Back
+"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_76cyw")
+
+[node name="GameOver" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 72.0
+offset_right = 248.0
+offset_bottom = 165.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 96
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="1" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+offset_left = 272.0
+offset_top = 192.0
+offset_right = 619.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 56
+text = "Developer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="1"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = -288.0
+offset_top = 64.0
+offset_right = 640.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 56
+text = "Addison Reyes
+(Lord Dakota)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="2" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+offset_left = 248.0
+offset_top = 456.0
+offset_right = 637.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 56
+text = "Software used"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="2"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = -272.0
+offset_top = 64.0
+offset_right = 656.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 56
+text = "Godot 4
+Aseprite
+LabChirp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+offset_left = 960.0
+offset_top = 208.0
+offset_right = 1349.0
+offset_bottom = 264.0
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 56
+text = "Sound effects
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="3"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = -272.0
+offset_top = 64.0
+offset_right = 656.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 56
+text = "Created with LapChirp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="4" type="Label" parent="."]
+modulate = Color(1, 0.654902, 0.992157, 1)
+offset_left = 960.0
+offset_top = 448.0
+offset_right = 1349.0
+offset_bottom = 504.0
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 56
+text = "Music
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="4"]
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
+offset_left = -272.0
+offset_top = 64.0
+offset_right = 656.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("2_85s3j")
+theme_override_font_sizes/font_size = 56
+text = "8 bit game loop - josefpres
+(Freesound)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FortuneFae" parent="." instance=ExtResource("5_6g843")]
+position = Vector2(264, 208)
+scale = Vector2(2.6, 2.6)
+
+[node name="FortuneFae2" parent="." instance=ExtResource("5_6g843")]
+position = Vector2(1488, 464)
+scale = Vector2(2.6, 2.6)
+
+[node name="FortuneFae3" parent="." instance=ExtResource("5_6g843")]
+position = Vector2(616, 576)
+scale = Vector2(2.6, 2.6)
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cydrxsjn3ea45"]
+[gd_scene load_steps=8 format=3 uid="uid://cydrxsjn3ea45"]
 
 [ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="1_8ygbk"]
 [ext_resource type="Script" path="res://Scripts/menu.gd" id="1_fvlys"]
 [ext_resource type="PackedScene" uid="uid://bccrnd75ajlpb" path="res://Sprites/Menu.aseprite" id="2_fok0r"]
+[ext_resource type="Texture2D" uid="uid://bw0twjn72ak73" path="res://Sprites/logo.png" id="3_737f3"]
+[ext_resource type="AudioStream" uid="uid://jrw3fq03011b" path="res://Audio/clickButtom.wav" id="4_v7djn"]
+[ext_resource type="PackedScene" uid="uid://cikvq4hmecx2i" path="res://Sprites/Fae3.aseprite" id="6_wmc0n"]
+[ext_resource type="PackedScene" uid="uid://dbqrn71gbg75q" path="res://Sprites/Fae2.aseprite" id="7_ks65i"]
 
 [node name="Menu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +21,11 @@ script = ExtResource("1_fvlys")
 [node name="Menu" parent="." instance=ExtResource("2_fok0r")]
 position = Vector2(912, 520)
 scale = Vector2(2, 2)
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(520, 448)
+scale = Vector2(2, 2)
+texture = ExtResource("3_737f3")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -69,7 +79,20 @@ text = "Exit"
 icon_alignment = 1
 vertical_icon_alignment = 0
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_v7djn")
+
+[node name="Fae3" parent="." instance=ExtResource("6_wmc0n")]
+position = Vector2(216, 344)
+scale = Vector2(6, 6)
+flip_h = true
+
+[node name="Fae2" parent="." instance=ExtResource("7_ks65i")]
+position = Vector2(848, 392)
+scale = Vector2(4, 4)
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -10,30 +10,37 @@ size = Vector2(22, 8.33333)
 size = Vector2(24, 11)
 
 [node name="CrystalP" type="CharacterBody2D"]
+process_mode = 1
 collision_layer = 16386
 collision_mask = 16386
 script = ExtResource("1_17p0y")
 
 [node name="CrystalProyectile" parent="." instance=ExtResource("2_3miwk")]
+process_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+process_mode = 1
 position = Vector2(0, 0.5)
 scale = Vector2(1, 1.08)
 shape = SubResource("RectangleShape2D_yh660")
 
 [node name="Area2D" type="Area2D" parent="."]
+process_mode = 1
 collision_layer = 16387
 collision_mask = 16387
 collision_priority = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+process_mode = 1
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_su5ns")
 
 [node name="Timer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 10.0
 
 [node name="_Gravity_" type="Timer" parent="."]
+process_mode = 1
 wait_time = 0.1
 autostart = true
 

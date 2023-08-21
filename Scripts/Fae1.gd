@@ -15,7 +15,7 @@ var player
 var objetive
 
 #Atributes
-var maxHealth = 60
+var maxHealth = 45
 var health = maxHealth
 var damage = 10
 
@@ -44,6 +44,9 @@ func _ready():
 
 func _physics_process(delta):
 	update_health()
+	
+	if health <= 0:
+		death()
 	
 	$RayCast2D.look_at(crystal.position)
 	$RayCast2D2.look_at(player.position)
@@ -80,6 +83,7 @@ func _physics_process(delta):
 
 
 func take_damage(damage):
+	$AudioStreamPlayer2D.play()
 	if health <= 0:
 		death()
 
@@ -107,11 +111,11 @@ func death():
 		get_parent().get_node("Items").add_child(new_item)
 	
 	player.FaeKilled += 1
-	
 	queue_free()
 
 
 func update_health():
+	healthBar.max_value = maxHealth
 	if health >= maxHealth:
 		health = maxHealth
 		

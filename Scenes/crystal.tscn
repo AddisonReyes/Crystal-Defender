@@ -1,36 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxhf8cem57cse"]
+[gd_scene load_steps=7 format=3 uid="uid://cxhf8cem57cse"]
 
 [ext_resource type="PackedScene" uid="uid://e42fmrqn5kup" path="res://Sprites/PlayerCristal.aseprite" id="1_0vi3a"]
 [ext_resource type="Script" path="res://Scripts/crystal.gd" id="1_axjf5"]
 [ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="3_6rs28"]
+[ext_resource type="AudioStream" uid="uid://cmqs6pxrivnwe" path="res://Audio/CrystalHurt.wav" id="4_ef243"]
+[ext_resource type="AudioStream" uid="uid://jj4fnufkkcm1" path="res://Audio/gameOver.wav" id="5_6mwv5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uybs"]
 size = Vector2(53.3333, 149.333)
 
 [node name="Crystal" type="CharacterBody2D"]
+process_mode = 1
 scale = Vector2(1.5, 1.5)
 collision_layer = 16384
 collision_mask = 16384
 script = ExtResource("1_axjf5")
 
 [node name="PlayerCristal" parent="." instance=ExtResource("1_0vi3a")]
+process_mode = 3
 position = Vector2(0, -26.6667)
 scale = Vector2(2.5, 2.5)
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+process_mode = 1
 position = Vector2(0, -21.3333)
 shape = SubResource("RectangleShape2D_5uybs")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+process_mode = 1
 modulate = Color(0.447059, 1, 0.47451, 1)
 offset_left = -160.0
 offset_top = -133.333
 offset_right = 160.0
 offset_bottom = -103.333
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="HealthBar"]
+process_mode = 1
 layout_mode = 0
 offset_left = 5.33333
 offset_top = -21.0
@@ -41,10 +49,19 @@ theme_override_font_sizes/font_size = 26
 text = "99999 / 99999"
 horizontal_alignment = 1
 vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="HealTimer" type="Timer" parent="."]
+process_mode = 1
 
 [node name="Recovery" type="Timer" parent="."]
+process_mode = 1
 wait_time = 0.5
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ef243")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6mwv5")
 
 [connection signal="timeout" from="Recovery" to="." method="_on_recovery_timeout"]

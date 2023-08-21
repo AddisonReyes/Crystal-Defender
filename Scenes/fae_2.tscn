@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://8b46o7b47nq1"]
+[gd_scene load_steps=7 format=3 uid="uid://8b46o7b47nq1"]
 
 [ext_resource type="Script" path="res://Scripts/Fae2.gd" id="1_vlrs4"]
 [ext_resource type="PackedScene" uid="uid://dbqrn71gbg75q" path="res://Sprites/Fae2.aseprite" id="2_15kh7"]
+[ext_resource type="AudioStream" uid="uid://dsdnf06igq4lt" path="res://Audio/Fae2_Hurt.wav" id="3_s1jpr"]
+[ext_resource type="AudioStream" uid="uid://b3xad2cvcg2b7" path="res://Audio/Proyectile.wav" id="4_iy02t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwmpu"]
 size = Vector2(26, 28)
@@ -10,6 +12,7 @@ size = Vector2(26, 28)
 radius = 280.0
 
 [node name="Fae2" type="CharacterBody2D"]
+process_mode = 1
 collision_layer = 32772
 collision_mask = 32772
 motion_mode = 1
@@ -17,48 +20,67 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_vlrs4")
 
 [node name="Fae2" parent="." instance=ExtResource("2_15kh7")]
+process_mode = 3
 scale = Vector2(2.5, 2.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+process_mode = 1
 shape = SubResource("RectangleShape2D_dwmpu")
 
 [node name="AttackArea2D" type="Area2D" parent="."]
+process_mode = 1
 collision_layer = 3
 collision_mask = 16387
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+process_mode = 1
 shape = SubResource("CircleShape2D_u5xin")
 debug_color = Color(0.980392, 0, 0.392157, 0.419608)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+process_mode = 1
 modulate = Color(0.447059, 1, 0.47451, 1)
 offset_left = -40.0
 offset_top = -48.0
 offset_right = 40.0
 offset_bottom = -38.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 1.2
 
 [node name="Recovery" type="Timer" parent="."]
+process_mode = 1
 wait_time = 0.5
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+process_mode = 1
 target_position = Vector2(328, -32)
 collision_mask = 16385
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
+process_mode = 1
 target_position = Vector2(392, 8)
 collision_mask = 16385
 
 [node name="magic" type="Node2D" parent="."]
+process_mode = 1
 
 [node name="position" type="Marker2D" parent="magic"]
+process_mode = 1
 position = Vector2(32, 0)
 
 [node name="direction" type="Marker2D" parent="magic"]
+process_mode = 1
 position = Vector2(90, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_s1jpr")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_iy02t")
 
 [connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
 [connection signal="body_exited" from="AttackArea2D" to="." method="_on_attack_area_2d_body_exited"]
@@ -66,3 +88,4 @@ position = Vector2(90, 0)
 [connection signal="mouse_exited" from="AttackArea2D" to="." method="_on_attack_area_2d_mouse_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Recovery" to="." method="_on_recovery_timeout"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

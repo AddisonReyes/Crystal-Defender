@@ -1,10 +1,21 @@
 extends Control
 
+var rng = RandomNumberGenerator.new()
 var data
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Player.play("Dance")
+	var num = rng.randi_range(0, 2)
+	
+	if num == 0:
+		$Player.play("Dance")
+	
+	if num == 1:
+		$Player.play("Death")
+	
+	if num == 2:
+		$Player.play("Idle")
+	
 	load_data()
 
 
@@ -40,3 +51,14 @@ func _on_menu_pressed():
 
 func _on_exit_pressed():
 	get_tree().quit()
+
+
+func _on_fullscreen_pressed():
+	$AudioStreamPlayer2D.play()
+	if DisplayServer.window_get_mode() == 0:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		return
+	
+	if DisplayServer.window_get_mode() == 3:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		return

@@ -46,6 +46,9 @@ func _ready():
 func _physics_process(delta):
 	update_health()
 	
+	if health <= 0:
+		death()
+	
 	$RayCast2D.look_at(crystal.position)
 	$RayCast2D2.look_at(player.position)
 	
@@ -86,6 +89,7 @@ func _physics_process(delta):
 
 
 func multiShoot():
+	$AudioStreamPlayer2D2.play()
 	var proyectileInst = ProyectilePath.instantiate()
 	
 	var positions = [$magic/position1.global_position, $magic/position2.global_position, $magic/position3.global_position]
@@ -102,6 +106,7 @@ func multiShoot():
 
 
 func take_damage(damage):
+	$AudioStreamPlayer2D.play()
 	if health <= 0:
 		death()
 
@@ -134,6 +139,7 @@ func death():
 
 
 func update_health():
+	healthBar.max_value = maxHealth
 	if health >= maxHealth:
 		health = maxHealth
 		

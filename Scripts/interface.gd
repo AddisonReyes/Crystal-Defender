@@ -1,6 +1,6 @@
 extends Control
 
-var pause = false
+
 var player
 
 
@@ -16,6 +16,5 @@ func _process(delta):
 
 
 func _on_pause_pressed():
-	get_tree().change_scene_to_file("res://Scenes/pause.tscn")
-	pause = true
-	
+	$AudioStreamPlayer2D.play()
+	get_tree().paused = true

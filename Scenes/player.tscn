@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://de74jipsmjoxb"]
+[gd_scene load_steps=12 format=3 uid="uid://de74jipsmjoxb"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4wtbe"]
 [ext_resource type="PackedScene" uid="uid://7yqbsnibq45l" path="res://Sprites/Player.aseprite" id="2_n0ka6"]
 [ext_resource type="PackedScene" uid="uid://cw8ev3ytdtau2" path="res://Sprites/Bow.aseprite" id="3_4qxt2"]
 [ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="3_twptl"]
+[ext_resource type="AudioStream" uid="uid://dfncl3noga1o6" path="res://Audio/FlipCoin.wav" id="5_dv6ct"]
+[ext_resource type="AudioStream" uid="uid://c6jsx6p8nukns" path="res://Audio/playerHurt.wav" id="6_d2ypv"]
+[ext_resource type="AudioStream" uid="uid://d2116wht8355u" path="res://Audio/bow.wav" id="6_m35qr"]
+[ext_resource type="AudioStream" uid="uid://puy2bp464iu0" path="res://Audio/death.wav" id="7_ygw1c"]
+[ext_resource type="AudioStream" uid="uid://d1dhpiuvayc55" path="res://Audio/PlayerHeal.wav" id="9_xgbvd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ot13"]
 size = Vector2(20, 30)
@@ -12,11 +17,13 @@ size = Vector2(20, 30)
 size = Vector2(30, 21)
 
 [node name="Player" type="CharacterBody2D"]
+process_mode = 1
 texture_filter = 3
 collision_mask = 16387
 script = ExtResource("1_4wtbe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 1
 texture_filter = 1
 limit_left = -2390
 limit_top = 0
@@ -25,21 +32,26 @@ limit_bottom = 800
 editor_draw_limits = true
 
 [node name="InterfacePosition" type="Marker2D" parent="Camera2D"]
+process_mode = 1
 position = Vector2(-800, -728)
 
 [node name="Player" parent="." instance=ExtResource("2_n0ka6")]
+process_mode = 1
 position = Vector2(-1.19209e-07, 5.96046e-08)
 scale = Vector2(2.5, 2.5)
 
 [node name="Body" type="CollisionShape2D" parent="."]
+process_mode = 1
 position = Vector2(0, 18)
 shape = SubResource("RectangleShape2D_8ot13")
 
 [node name="Head" type="CollisionShape2D" parent="."]
+process_mode = 1
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_xjj3f")
 
 [node name="Label" type="Label" parent="."]
+process_mode = 1
 offset_left = -26.0
 offset_top = -127.0
 offset_right = 26.0
@@ -49,52 +61,84 @@ theme_override_font_sizes/font_size = 46
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+process_mode = 1
 modulate = Color(0.447059, 1, 0.47451, 1)
 offset_left = -41.0
 offset_top = -53.0
 offset_right = 41.0
 offset_bottom = -39.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="Timers" type="Node2D" parent="."]
+process_mode = 1
 
 [node name="HealTimer" type="Timer" parent="Timers"]
+process_mode = 1
 wait_time = 0.4
 
 [node name="FireRate" type="Timer" parent="Timers"]
+process_mode = 1
 
 [node name="Recovery" type="Timer" parent="Timers"]
+process_mode = 1
 wait_time = 0.5
 
 [node name="ReviveTimer" type="Timer" parent="Timers"]
+process_mode = 1
 
 [node name="CoinCooldown" type="Timer" parent="Timers"]
+process_mode = 1
 
 [node name="Bow" type="Node2D" parent="."]
+process_mode = 1
 
 [node name="Bow" parent="Bow" instance=ExtResource("3_4qxt2")]
+process_mode = 1
 position = Vector2(21, 1)
 scale = Vector2(1.6, 1.6)
 
 [node name="position3" type="Marker2D" parent="Bow"]
+process_mode = 1
 position = Vector2(24, 8)
 
 [node name="position2" type="Marker2D" parent="Bow"]
+process_mode = 1
 position = Vector2(32, 0)
 
 [node name="position1" type="Marker2D" parent="Bow"]
+process_mode = 1
 position = Vector2(24, -8)
 
 [node name="direction1" type="Marker2D" parent="Bow"]
+process_mode = 1
 position = Vector2(64, -10)
 
 [node name="direction2" type="Marker2D" parent="Bow"]
+process_mode = 1
 position = Vector2(74, 0)
 
 [node name="direction3" type="Marker2D" parent="Bow"]
+process_mode = 1
 position = Vector2(64, 10)
+
+[node name="CoinFlip" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_dv6ct")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_d2ypv")
+
+[node name="bow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_m35qr")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ygw1c")
+
+[node name="Heal" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_xgbvd")
 
 [connection signal="timeout" from="Timers/HealTimer" to="." method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="Timers/FireRate" to="." method="_on_fire_rate_timeout"]
