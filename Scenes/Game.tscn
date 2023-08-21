@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dairsevnxk634"]
+[gd_scene load_steps=17 format=3 uid="uid://dairsevnxk634"]
 
 [ext_resource type="PackedScene" uid="uid://b5uuqbq3qpqvo" path="res://Sprites/Background.aseprite" id="1_q5s2u"]
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_ye4ex"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="5_xo4ya"]
 [ext_resource type="PackedScene" uid="uid://d23qsnmgxegk5" path="res://Scenes/pause.tscn" id="8_xlir8"]
 [ext_resource type="AudioStream" uid="uid://jrw3fq03011b" path="res://Audio/clickButtom.wav" id="9_jiby6"]
-[ext_resource type="PackedScene" uid="uid://cfead17a168ca" path="res://Scenes/Coin.tscn" id="10_dcahy"]
 [ext_resource type="AudioStream" uid="uid://5xpurup08g0e" path="res://Audio/653714__josefpres__8-bit-game-loop-003-simple-mix-1-long-16-bit-120-bpm.wav" id="11_6j6m4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4p8ep"]
@@ -80,12 +79,6 @@ layer_0/tile_data = PackedInt32Array(589848, 0, 0, 589847, 0, 0, 589846, 0, 0, 5
 
 [node name="Items" type="Node2D" parent="."]
 process_mode = 1
-
-[node name="Coin" parent="Items" instance=ExtResource("10_dcahy")]
-position = Vector2(2200, 608)
-
-[node name="Coin2" parent="Items" instance=ExtResource("10_dcahy")]
-position = Vector2(-2280, 616)
 
 [node name="Crystal" parent="." instance=ExtResource("3_mpkvw")]
 position = Vector2(0, 432)

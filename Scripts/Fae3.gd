@@ -6,7 +6,7 @@ class_name Fae3
 const ProyectilePath = preload("res://Scenes/crystalProyectile.tscn")
 const CrystalPath = preload("res://Scenes/crystalHeart.tscn")
 const HeartPath = preload("res://Scenes/heart.tscn")
-const CoinPath = preload("res://Scenes/Coin.tscn")
+const CoinPath = preload("res://Scenes/coin.tscn")
 var rng = RandomNumberGenerator.new()
 
 var healthBar
@@ -37,6 +37,7 @@ func _ready():
 	player = get_parent().get_node("Player")
 	objetive = player
 	
+	health = maxHealth
 	healthBar = $HealthBar
 	healthBar.max_value = maxHealth
 	

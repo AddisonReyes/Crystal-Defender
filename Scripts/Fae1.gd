@@ -5,7 +5,7 @@ class_name Fae1
 #Objects
 const CrystalPath = preload("res://Scenes/crystalHeart.tscn")
 const HeartPath = preload("res://Scenes/heart.tscn")
-const CoinPath = preload("res://Scenes/Coin.tscn")
+const CoinPath = preload("res://Scenes/coin.tscn")
 var rng = RandomNumberGenerator.new()
 
 var healthBar
@@ -38,6 +38,7 @@ func _ready():
 	
 	healthBar = $HealthBar
 	healthBar.max_value = maxHealth
+	health = maxHealth
 	
 	$Fae1.play("default")
 
