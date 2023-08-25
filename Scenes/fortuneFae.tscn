@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8ba78xu2uuq3"]
+[gd_scene load_steps=7 format=3 uid="uid://b8ba78xu2uuq3"]
 
 [ext_resource type="Script" path="res://Scripts/Fae1.gd" id="1_da5pv"]
 [ext_resource type="PackedScene" uid="uid://ba3w4n1jggcry" path="res://Sprites/FortuneFae.aseprite" id="2_snk4k"]
 [ext_resource type="AudioStream" uid="uid://bcxn71k1q1fnl" path="res://Audio/FortuneFae_Hurt.wav" id="3_4mqyp"]
+[ext_resource type="AudioStream" uid="uid://dygpqjyinngvq" path="res://Audio/EnemyDeath.wav" id="4_5xqtl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwmpu"]
-size = Vector2(26, 28)
+size = Vector2(32, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u5xin"]
 radius = 24.0
@@ -49,6 +50,9 @@ metadata/_edit_use_anchors_ = true
 process_mode = 1
 wait_time = 1.6
 
+[node name="Frozen" type="Timer" parent="."]
+wait_time = 2.6
+
 [node name="Recovery" type="Timer" parent="."]
 process_mode = 1
 wait_time = 0.5
@@ -65,10 +69,17 @@ collision_mask = 16385
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_4mqyp")
+area_mask = 16385
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5xqtl")
+area_mask = 16385
 
 [connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
 [connection signal="body_exited" from="AttackArea2D" to="." method="_on_attack_area_2d_body_exited"]
 [connection signal="mouse_entered" from="AttackArea2D" to="." method="_on_attack_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="AttackArea2D" to="." method="_on_attack_area_2d_mouse_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Frozen" to="." method="_on_frozen_timeout"]
 [connection signal="timeout" from="Recovery" to="." method="_on_recovery_timeout"]
+[connection signal="finished" from="Death" to="." method="_on_death_finished"]

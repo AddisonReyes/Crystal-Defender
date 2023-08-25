@@ -11,8 +11,8 @@ size = Vector2(29, 14)
 
 [node name="Arrow" type="CharacterBody2D"]
 process_mode = 1
-collision_layer = 32768
-collision_mask = 32768
+collision_layer = 98304
+collision_mask = 98304
 script = ExtResource("1_fpuhx")
 
 [node name="Arrow" parent="." instance=ExtResource("2_aine5")]
@@ -27,8 +27,8 @@ shape = SubResource("RectangleShape2D_yh660")
 
 [node name="Area2D" type="Area2D" parent="."]
 process_mode = 1
-collision_layer = 32769
-collision_mask = 32769
+collision_layer = 98305
+collision_mask = 98305
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 process_mode = 1
@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_su5ns")
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1
-wait_time = 5.0
+wait_time = 3.0
 
 [node name="_Gravity_" type="Timer" parent="."]
 process_mode = 1

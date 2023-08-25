@@ -4,6 +4,7 @@ class_name Player
 
 #Objects
 const ArrowPath = preload("res://Scenes/arrow.tscn")
+const FrozenArrowPath = preload("res://Scenes/frozenArrow.tscn")
 const CoinPath = preload("res://Scenes/coin_flipping.tscn")
 var Coin = CoinPath.instantiate()
 var crystal
@@ -11,9 +12,9 @@ var crystal
 var healthBar
 
 #Atributes
-var damage = 21
+var damage = 25
 var fireRate = 0.6
-var maxHealth = 60
+var maxHealth = 100
 var health = maxHealth
 
 const PIXELS_TO_MOVE = 1.6
@@ -25,6 +26,7 @@ var InterfacePosition
 var canFlipCoins = true
 var lookingRight = true
 var multiShoot = false
+var frozenBow = false
 var can_shoot = true
 var reviveTime = 3
 var alive = true
@@ -64,6 +66,9 @@ func _physics_process(delta):
 		InterfacePosition = Vector2(805.8309, -8)
 	
 	update_health()
+	
+	if frozenBow:
+		$Bow.modulate = Color(0, 1, 1, 1)
 	
 	if health <= 0 and alive:
 		death()
@@ -142,10 +147,19 @@ func shoot():
 	if multiShoot:
 		var positions = [$Bow/position1.global_position, $Bow/position2.global_position, $Bow/position3.global_position]
 		var directions = [$Bow/direction1.global_position, $Bow/direction2.global_position, $Bow/direction3.global_position]
+		
+		var frozenArrowInst = ArrowPath.instantiate()
 		var arrowInst = ArrowPath.instantiate()
 		
 		for i in range(3):
-			var arrow = arrowInst.duplicate()
+			var arrow
+			
+			if frozenBow:
+				arrow = frozenArrowInst.duplicate()
+				
+			else:
+				arrow = arrowInst.duplicate()
+				
 			get_parent().add_child(arrow)
 			
 			arrow.position = positions[i]
@@ -154,7 +168,14 @@ func shoot():
 			arrow.damage = damage / 2
 		
 	else:
-		var arrow = ArrowPath.instantiate()
+		var arrow
+			
+		if frozenBow:
+			arrow = FrozenArrowPath.instantiate()
+			
+		else:
+			arrow = ArrowPath.instantiate()
+				
 		get_parent().add_child(arrow)
 		
 		arrow.position = $Bow/position2.global_position

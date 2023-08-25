@@ -17,7 +17,7 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	if body is Player and collected == false:
 		if crystal.health != crystal.maxHealth:
-			crystal.heals(HealthPoints)
+			crystal.heals(crystal.health/6)
 			$AudioStreamPlayer2D.play()
 			
 			collected = true

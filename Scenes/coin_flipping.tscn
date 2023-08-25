@@ -19,6 +19,7 @@ wait_time = 6.0
 
 [node name="Label" type="Label" parent="."]
 process_mode = 1
+modulate = Color(1, 0.654902, 0.992157, 1)
 offset_left = -177.0
 offset_top = -129.0
 offset_right = 178.0

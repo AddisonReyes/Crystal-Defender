@@ -1,28 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://8b46o7b47nq1"]
+[gd_scene load_steps=8 format=3 uid="uid://dbtodlpipqw52"]
 
-[ext_resource type="Script" path="res://Scripts/Fae2.gd" id="1_vlrs4"]
-[ext_resource type="PackedScene" uid="uid://dbqrn71gbg75q" path="res://Sprites/Fae2.aseprite" id="2_15kh7"]
-[ext_resource type="AudioStream" uid="uid://dsdnf06igq4lt" path="res://Audio/Fae2_Hurt.wav" id="3_s1jpr"]
-[ext_resource type="AudioStream" uid="uid://b3xad2cvcg2b7" path="res://Audio/Proyectile.wav" id="4_iy02t"]
-[ext_resource type="AudioStream" uid="uid://dygpqjyinngvq" path="res://Audio/EnemyDeath.wav" id="5_i1fqw"]
+[ext_resource type="Script" path="res://Scripts/Fae5.gd" id="1_tt3o8"]
+[ext_resource type="PackedScene" uid="uid://c1vxq5uwg44qn" path="res://Sprites/Fae5.aseprite" id="2_5mlmy"]
+[ext_resource type="AudioStream" uid="uid://cdndsac116sso" path="res://Audio/Fae3_Hurt.wav" id="3_1ru6w"]
+[ext_resource type="AudioStream" uid="uid://b3xad2cvcg2b7" path="res://Audio/Proyectile.wav" id="4_dsqla"]
+[ext_resource type="AudioStream" uid="uid://dygpqjyinngvq" path="res://Audio/EnemyDeath.wav" id="5_fl2rl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwmpu"]
 size = Vector2(21, 48)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u5xin"]
-radius = 280.0
+radius = 360.089
 
-[node name="Fae2" type="CharacterBody2D"]
+[node name="Fae5" type="CharacterBody2D"]
 process_mode = 1
 collision_layer = 32772
 collision_mask = 32772
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_vlrs4")
+script = ExtResource("1_tt3o8")
 
-[node name="Fae2" parent="." instance=ExtResource("2_15kh7")]
-process_mode = 3
-scale = Vector2(2.5, 2.5)
+[node name="Fae5" parent="." instance=ExtResource("2_5mlmy")]
+scale = Vector2(2.6, 2.6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 process_mode = 1
@@ -43,15 +42,15 @@ debug_color = Color(0.980392, 0, 0.392157, 0.419608)
 process_mode = 1
 modulate = Color(0.447059, 1, 0.47451, 1)
 offset_left = -40.0
-offset_top = -48.0
+offset_top = -56.0
 offset_right = 40.0
-offset_bottom = -38.0
+offset_bottom = -46.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1
-wait_time = 1.2
+wait_time = 1.6
 
 [node name="Frozen" type="Timer" parent="."]
 wait_time = 2.6
@@ -62,35 +61,75 @@ wait_time = 0.5
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 process_mode = 1
-target_position = Vector2(328, -32)
+target_position = Vector2(376, -40)
 collision_mask = 16385
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 process_mode = 1
-target_position = Vector2(392, 8)
+target_position = Vector2(504, -8)
 collision_mask = 16385
 
 [node name="magic" type="Node2D" parent="."]
 process_mode = 1
 
-[node name="position" type="Marker2D" parent="magic"]
+[node name="position3" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(48, 24)
+
+[node name="position5" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(32, 48)
+
+[node name="position4" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(64, 0)
+
+[node name="position6" type="Marker2D" parent="magic"]
 process_mode = 1
 position = Vector2(32, 0)
 
-[node name="direction" type="Marker2D" parent="magic"]
+[node name="position2" type="Marker2D" parent="magic"]
 process_mode = 1
-position = Vector2(90, 0)
+position = Vector2(48, -24)
+
+[node name="position1" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(32, -48)
+
+[node name="direction1" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(96, -48)
+
+[node name="direction2" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(112, -24)
+
+[node name="direction4" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(128, 0)
+
+[node name="direction6" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(96, 0)
+
+[node name="direction3" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(112, 24)
+
+[node name="direction5" type="Marker2D" parent="magic"]
+process_mode = 1
+position = Vector2(96, 48)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_s1jpr")
+stream = ExtResource("3_1ru6w")
 area_mask = 16385
 
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_iy02t")
+stream = ExtResource("4_dsqla")
 area_mask = 16385
 
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_i1fqw")
+stream = ExtResource("5_fl2rl")
 area_mask = 16385
 
 [connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]

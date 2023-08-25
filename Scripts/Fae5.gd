@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Fae2
+class_name Fae5
 
 
 #Objects
@@ -16,17 +16,17 @@ var player
 var objetive
 
 #Atributes
-var maxHealth = 55
+var maxHealth = 75
 var health = maxHealth
-var damage = 15
+var damage = 5
 
-const realSPEED = 260
-var SPEED = 260
+const realSPEED = 220
+var SPEED = 220
 var state = "Walk"
 var alive = true
 
 var enemyFrozed = false
-var item_drop = 0.25
+var item_drop = 0.8
 var canAttack = false
 var attackCooldown = true
 
@@ -42,11 +42,10 @@ func _ready():
 	objetive = player
 	
 	health = maxHealth
-	
 	healthBar = $HealthBar
 	healthBar.max_value = maxHealth
 	
-	$Fae2.play("default")
+	$Fae5.play("default")
 
 
 func _physics_process(delta):
@@ -72,13 +71,13 @@ func _physics_process(delta):
 		
 		$magic.look_at(objetive.position)
 		if self.position.x <= objetive.position.x:
-			$Fae2.flip_h = true
+			$Fae5.flip_h = true
 		else:
-			$Fae2.flip_h = false
+			$Fae5.flip_h = false
 		
 		if state == "Attack" and objetive.alive:
 			if canAttack and attackCooldown:
-				singleShoot()
+				multiShoot()
 				attackCooldown = false
 				$Timer.start()
 		
@@ -92,15 +91,21 @@ func _physics_process(delta):
 				move_and_slide()
 
 
-func singleShoot():
+func multiShoot():
 	$AudioStreamPlayer2D2.play()
-	var proyectile = ProyectilePath.instantiate()
-	get_parent().add_child(proyectile)
+	var proyectileInst = ProyectilePath.instantiate()
 	
-	proyectile.position = $magic/position.global_position
-	proyectile.direction = $magic/direction.global_position
-	proyectile.arrowVelocity = $magic/direction.global_position - proyectile.position
-	proyectile.damage = damage
+	var positions = [$magic/position1.global_position, $magic/position2.global_position, $magic/position3.global_position, $magic/position4.global_position, $magic/position5.global_position, $magic/position6.global_position]
+	var directions = [$magic/direction1.global_position, $magic/direction2.global_position, $magic/direction3.global_position, $magic/direction4.global_position, $magic/direction5.global_position, $magic/direction6.global_position]
+	
+	for i in range(6):
+		var proyectile = proyectileInst.duplicate()
+		get_parent().add_child(proyectile)
+		
+		proyectile.position = positions[i]
+		proyectile.direction = directions[i]
+		proyectile.arrowVelocity = directions[i] - proyectile.position
+		proyectile.damage = damage
 
 
 func frozed():

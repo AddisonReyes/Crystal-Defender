@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Arrow
+class_name FrozenArrow
 
 
 var arrowVelocity = Vector2(0, 0)
@@ -37,6 +37,7 @@ func _on_area_2d_body_entered(body):
 		
 	if body is Fae1 or body is Fae2 or body is Fae3 or body is Fae4 or body is Fae5:
 		body.take_damage(damage)
+		body.frozed()
 		queue_free()
 
 

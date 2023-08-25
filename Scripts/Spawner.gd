@@ -10,6 +10,8 @@ const fae0 = preload("res://Scenes/fae_0.tscn")
 const fae1 = preload("res://Scenes/fae_1.tscn")
 const fae2 = preload("res://Scenes/fae_2.tscn")
 const fae3 = preload("res://Scenes/fae_3.tscn")
+const fae4 = preload("res://Scenes/fae_4.tscn")
+const fae5 = preload("res://Scenes/fae_5.tscn")
 const fortuneFae = preload("res://Scenes/fortuneFae.tscn")
 
 #Instances
@@ -17,10 +19,13 @@ var fae0_instance = fae0.instantiate()
 var fae1_instance = fae1.instantiate()
 var fae2_instance = fae2.instantiate()
 var fae3_instance = fae3.instantiate()
+var fae4_instance = fae4.instantiate()
+var fae5_instance = fae5.instantiate()
 var fortuneFae_inst = fortuneFae.instantiate()
 
-var dificultyAdded = 1
-var spawnRate = 4
+var dificultyAdded = -5
+var enemiesSpawn = 1
+var spawnRate = 5
 
 func _ready():
 	player = get_parent().get_node("Player")
@@ -33,8 +38,13 @@ func update_spawn_rate():
 
 
 func add_difficulty():
-	dificultyAdded += 5
-	spawnRate -= 0.023
+	dificultyAdded += 10
+	spawnRate -= 0.025
+
+
+func add_enemy():
+	if enemiesSpawn <= 6:
+		enemiesSpawn += 1
 
 
 func _get_rspawn_position():
@@ -70,60 +80,88 @@ func _get_lspawn_position():
 
 
 func spawn_left_enemy():
-	var Num = rng.randi_range(0, 4)
+	var Num = rng.randi_range(0, enemiesSpawn)
 	var newEnemy
 			
 	if Num == 0:
-		newEnemy = fae1_instance.duplicate()
-		newEnemy.maxHealth += dificultyAdded
-		newEnemy.damage += dificultyAdded
-	elif Num == 1:
-		newEnemy = fae2_instance.duplicate()
-		newEnemy.maxHealth = dificultyAdded
-		newEnemy.damage += dificultyAdded
-	elif Num == 2:
-		newEnemy = fae3_instance.duplicate()
-		newEnemy.maxHealth += dificultyAdded
-		newEnemy.damage += dificultyAdded
-	elif Num == 3:
 		newEnemy = fae0_instance.duplicate()
 		newEnemy.maxHealth += dificultyAdded
 		newEnemy.damage += dificultyAdded
-	else:
+		
+	elif Num == 1:
 		newEnemy = fortuneFae_inst.duplicate()
 		newEnemy.maxHealth += dificultyAdded
 		newEnemy.damage += dificultyAdded
-		newEnemy.item_drop = 0.5
+		newEnemy.item_drop = 0.4
+	
+	elif Num == 2:
+		newEnemy = fae1_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
+		
+	elif Num == 3:
+		newEnemy = fae2_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
+	
+	elif Num == 4:
+		newEnemy = fae3_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
+	
+	elif Num == 5:
+		newEnemy = fae4_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
+	
+	else:
+		newEnemy = fae5_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
 
 	newEnemy.position = _get_lspawn_position()
 	get_parent().add_child(newEnemy)
 
 
 func spawn_right_enemy():
-	var Num = rng.randi_range(0, 4)
+	var Num = rng.randi_range(0, enemiesSpawn)
 	var newEnemy
 			
 	if Num == 0:
-		newEnemy = fae1_instance.duplicate()
-		newEnemy.maxHealth += dificultyAdded
-		newEnemy.damage += dificultyAdded
-	elif Num == 1:
-		newEnemy = fae2_instance.duplicate()
-		newEnemy.maxHealth = dificultyAdded
-		newEnemy.damage += dificultyAdded
-	elif Num == 2:
-		newEnemy = fae3_instance.duplicate()
-		newEnemy.maxHealth += dificultyAdded
-		newEnemy.damage += dificultyAdded
-	elif Num == 3:
 		newEnemy = fae0_instance.duplicate()
 		newEnemy.maxHealth += dificultyAdded
 		newEnemy.damage += dificultyAdded
-	else:
+		
+	elif Num == 1:
 		newEnemy = fortuneFae_inst.duplicate()
 		newEnemy.maxHealth += dificultyAdded
 		newEnemy.damage += dificultyAdded
-		newEnemy.item_drop = 0.5
+		newEnemy.item_drop = 0.4
+	
+	elif Num == 2:
+		newEnemy = fae1_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
+		
+	elif Num == 3:
+		newEnemy = fae2_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
+	
+	elif Num == 4:
+		newEnemy = fae3_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
+	
+	elif Num == 5:
+		newEnemy = fae4_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
+	
+	else:
+		newEnemy = fae5_instance.duplicate()
+		newEnemy.maxHealth += dificultyAdded
+		newEnemy.damage += dificultyAdded
 
 	newEnemy.position = _get_rspawn_position()
 	get_parent().add_child(newEnemy)

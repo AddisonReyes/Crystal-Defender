@@ -16,20 +16,24 @@ var player
 var objetive
 
 #Atributes
-var maxHealth = 45
+var maxHealth = 65
 var health = maxHealth
 var damage = 10
 
-const SPEED = 260
+const realSPEED = 260
+var SPEED = 260
 var state = "Walk"
+var alive = true
 
-var item_drop = 0.4
+var enemyFrozed = false
+var item_drop = 0.3
 var canAttack = false
 var attackCooldown = true
 
 #Colors
 var damageColor = Color(1, 0, 0, 1)
 var defaultColor = Color(1, 1, 1, 1)
+var frozen = Color(0, 1, 1, 1)
 
 
 func _ready():
@@ -45,48 +49,46 @@ func _ready():
 
 
 func _physics_process(delta):
-	update_health()
-	
-	if health <= 0:
-		death()
-	
-	$RayCast2D.look_at(crystal.position)
-	$RayCast2D2.look_at(player.position)
-	
-	if $RayCast2D2.is_colliding() and objetive != crystal:
-		if $RayCast2D2.get_collider() is Player:
-			objetive = player
-			
-	if $RayCast2D.is_colliding():
-		if $RayCast2D.get_collider() is Crystal:
-			objetive = crystal
-	
-	if player.alive == false:
-		objetive = crystal
-	
-	elif crystal.alive == false:
-		objetive = player
-	
-	$magic.look_at(objetive.position)
-	if self.position.x <= objetive.position.x:
-		$Fae3.flip_h = true
-	else:
-		$Fae3.flip_h = false
-	
-	if state == "Attack" and objetive.alive:
-		if canAttack and attackCooldown:
-			multiShoot()
-			attackCooldown = false
-			$Timer.start()
-	
-	if state == "Walk" and objetive.alive:
-		var target_position = (objetive.position - position).normalized()
+	if alive:
+		update_health()
 		
-		if position.distance_to(objetive.position) > 3:
-			var new_position = Vector2(target_position.x, target_position.y)
-			velocity = Vector2(new_position * SPEED)
+		$RayCast2D.look_at(crystal.position)
+		$RayCast2D2.look_at(player.position)
+		
+		if $RayCast2D2.is_colliding() and objetive != crystal:
+			if $RayCast2D2.get_collider() is Player:
+				objetive = player
 				
-			move_and_slide()
+		if $RayCast2D.is_colliding():
+			if $RayCast2D.get_collider() is Crystal:
+				objetive = crystal
+		
+		if player.alive == false:
+			objetive = crystal
+		
+		elif crystal.alive == false:
+			objetive = player
+		
+		$magic.look_at(objetive.position)
+		if self.position.x <= objetive.position.x:
+			$Fae3.flip_h = true
+		else:
+			$Fae3.flip_h = false
+		
+		if state == "Attack" and objetive.alive:
+			if canAttack and attackCooldown:
+				multiShoot()
+				attackCooldown = false
+				$Timer.start()
+		
+		if state == "Walk" and objetive.alive:
+			var target_position = (objetive.position - position).normalized()
+			
+			if position.distance_to(objetive.position) > 3:
+				var new_position = Vector2(target_position.x, target_position.y)
+				velocity = Vector2(new_position * SPEED)
+					
+				move_and_slide()
 
 
 func multiShoot():
@@ -106,20 +108,30 @@ func multiShoot():
 		proyectile.damage = damage
 
 
+func frozed():
+	self.modulate = frozen
+	enemyFrozed = true
+	SPEED = SPEED/2
+	
+	$Frozen.start()
+
+
 func take_damage(damage):
-	$AudioStreamPlayer2D.play()
+	health -= damage
 	if health <= 0:
 		death()
 
+	$AudioStreamPlayer2D.play()
 	self.modulate = damageColor
 	$Recovery.start()
-	health -= damage
 
 
 func death():
+	alive = false
+	
 	var num = rng.randf_range(0.0, 1.0)
 	if num < item_drop:
-		var itemNum = rng.randi_range(0, 4)
+		var itemNum = rng.randi_range(0, 3)
 		var new_item
 		
 		if itemNum == 0:
@@ -135,8 +147,10 @@ func death():
 		get_parent().get_node("Items").add_child(new_item)
 	
 	player.FaeKilled += 1
-	
-	queue_free()
+	$CollisionShape2D.queue_free()
+	$Death.play()
+	state = "Death"
+	self.hide()
 
 
 func update_health():
@@ -170,7 +184,8 @@ func _on_timer_timeout():
 
 
 func _on_recovery_timeout():
-	self.modulate = defaultColor
+	if enemyFrozed == false:
+		self.modulate = defaultColor
 
 
 func _on_attack_area_2d_mouse_entered():
@@ -179,3 +194,13 @@ func _on_attack_area_2d_mouse_entered():
 
 func _on_attack_area_2d_mouse_exited():
 	healthBar.visible = false
+
+
+func _on_death_finished():
+	queue_free()
+
+
+func _on_frozen_timeout():
+	self.modulate = defaultColor
+	enemyFrozed = false
+	SPEED = realSPEED

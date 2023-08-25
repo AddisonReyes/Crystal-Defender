@@ -17,4 +17,8 @@ func _process(delta):
 
 func _on_pause_pressed():
 	$AudioStreamPlayer2D.play()
-	get_tree().paused = true
+	if get_tree().paused:
+		get_tree().paused = false
+	
+	else:
+		get_tree().paused = true

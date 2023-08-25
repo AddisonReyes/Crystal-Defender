@@ -1,43 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://by3yrxctt1phl"]
+[gd_scene load_steps=5 format=3 uid="uid://dkvkex8d2rkwl"]
 
-[ext_resource type="Script" path="res://Scripts/CrystalProyectile.gd" id="1_17p0y"]
-[ext_resource type="PackedScene" uid="uid://b3xc4ax1u4nml" path="res://Sprites/CrystalProyectile.aseprite" id="2_3miwk"]
+[ext_resource type="Script" path="res://Scripts/FrozenArrow.gd" id="1_w145p"]
+[ext_resource type="PackedScene" uid="uid://h86gxdxfdn2i" path="res://Sprites/Arrow.aseprite" id="2_tqai0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh660"]
-size = Vector2(22, 8.33333)
+size = Vector2(27, 11.5664)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_su5ns"]
-size = Vector2(24, 11)
+size = Vector2(29, 14)
 
-[node name="CrystalP" type="CharacterBody2D"]
+[node name="Arrow" type="CharacterBody2D"]
 process_mode = 1
-collision_layer = 16388
-collision_mask = 16388
-script = ExtResource("1_17p0y")
+modulate = Color(0, 1, 1, 1)
+collision_layer = 98304
+collision_mask = 98304
+script = ExtResource("1_w145p")
 
-[node name="CrystalProyectile" parent="." instance=ExtResource("2_3miwk")]
+[node name="Arrow" parent="." instance=ExtResource("2_tqai0")]
 process_mode = 1
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 process_mode = 1
-position = Vector2(0, 0.5)
+visible = false
+position = Vector2(2.5, -0.754131)
 scale = Vector2(1, 1.08)
 shape = SubResource("RectangleShape2D_yh660")
 
 [node name="Area2D" type="Area2D" parent="."]
 process_mode = 1
-collision_layer = 16387
-collision_mask = 16387
-collision_priority = 2.0
+visible = false
+collision_layer = 98305
+collision_mask = 98305
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 process_mode = 1
-position = Vector2(0, 0.5)
+position = Vector2(2.5, -1)
 shape = SubResource("RectangleShape2D_su5ns")
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1
-wait_time = 10.0
+wait_time = 3.0
 
 [node name="_Gravity_" type="Timer" parent="."]
 process_mode = 1

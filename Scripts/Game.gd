@@ -53,6 +53,7 @@ func _on_play_timer_timeout():
 	
 	if timePlayed % 60 == 0:
 		$Spawner.add_difficulty()
+		$Spawner.add_enemy()
 	
 	$PlayTimer.start()
 

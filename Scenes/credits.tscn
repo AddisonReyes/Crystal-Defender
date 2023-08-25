@@ -65,6 +65,7 @@ vertical_alignment = 1
 
 [node name="1" type="Label" parent="."]
 modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
 offset_left = 272.0
 offset_top = 192.0
 offset_right = 619.0
@@ -85,12 +86,13 @@ offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("2_85s3j")
 theme_override_font_sizes/font_size = 56
 text = "Addison Reyes
-(Lord Dakota)"
+(Lord Dakotah)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="2" type="Label" parent="."]
 modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
 offset_left = 248.0
 offset_top = 456.0
 offset_right = 637.0
@@ -118,6 +120,7 @@ vertical_alignment = 1
 
 [node name="3" type="Label" parent="."]
 modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
 offset_left = 960.0
 offset_top = 208.0
 offset_right = 1349.0
@@ -144,6 +147,7 @@ vertical_alignment = 1
 
 [node name="4" type="Label" parent="."]
 modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 0
 offset_left = 960.0
 offset_top = 448.0
 offset_right = 1349.0

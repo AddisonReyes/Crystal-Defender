@@ -1,7 +1,6 @@
 extends Node2D
 
 
-var HealthPoints = 35
 var collected = false
 
 
@@ -16,7 +15,7 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	if body is Player and collected == false:
 		if body.health != body.maxHealth:
-			body.heals(HealthPoints)
+			body.heals(body.health/3)
 			$AudioStreamPlayer2D.play()
 			
 			collected = true
