@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://k87bbxii4r1u"]
+[gd_scene load_steps=5 format=3 uid="uid://svuyoelwwybc"]
 
 [ext_resource type="Script" path="res://Scripts/Arrow.gd" id="1_fpuhx"]
 [ext_resource type="PackedScene" uid="uid://h86gxdxfdn2i" path="res://Sprites/Arrow.aseprite" id="2_aine5"]
@@ -24,6 +24,7 @@ process_mode = 1
 position = Vector2(2.5, -0.754131)
 scale = Vector2(1, 1.08)
 shape = SubResource("RectangleShape2D_yh660")
+disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 process_mode = 1

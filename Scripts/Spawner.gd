@@ -24,8 +24,11 @@ var fae5_instance = fae5.instantiate()
 var fortuneFae_inst = fortuneFae.instantiate()
 
 var dificultyAdded = -5
-var enemiesSpawn = 1
+var enemiesSpawn = 0
 var spawnRate = 5
+
+var twoSpawners = false
+
 
 func _ready():
 	player = get_parent().get_node("Player")
@@ -43,7 +46,7 @@ func add_difficulty():
 
 
 func add_enemy():
-	if enemiesSpawn <= 6:
+	if enemiesSpawn <= 7:
 		enemiesSpawn += 1
 
 
@@ -168,7 +171,17 @@ func spawn_right_enemy():
 
 
 func _on_timer_timeout():
-	spawn_left_enemy()
-	spawn_right_enemy()
+	if twoSpawners:
+		spawn_left_enemy()
+		spawn_right_enemy()
+	
+	else:
+		var spawnNum = rng.randi_range(0, 1)
+		
+		if spawnNum == 0:
+			spawn_left_enemy()
+		
+		else:
+			spawn_right_enemy()
 		
 	$Timer.start()

@@ -1,7 +1,7 @@
 extends Node2D
 
 var crystal
-var HealthPoints = 200
+var HealthPoints
 var collected = false
 
 
@@ -11,13 +11,13 @@ func _ready():
 
 
 func _process(delta):
-	pass
+	HealthPoints = crystal.maxHealth/6
 
 
 func _on_area_2d_body_entered(body):
 	if body is Player and collected == false:
 		if crystal.health != crystal.maxHealth:
-			crystal.heals(crystal.health/6)
+			crystal.heals(HealthPoints)
 			$AudioStreamPlayer2D.play()
 			
 			collected = true

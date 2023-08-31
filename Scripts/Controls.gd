@@ -7,9 +7,9 @@ func _ready():
 	$FortuneFae.play("default")
 	$FortuneFae2.play("default")
 	$FortuneFae3.play("default")
-	#$Label/Player.play("Walk")
-	#$Label3/Coin.play("default")
-	#$Label4/Player.play("Dance")
+	$Label/Player.play("Walk")
+	$Label3/Coin.play("default")
+	$Label4/Player.play("Dance")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

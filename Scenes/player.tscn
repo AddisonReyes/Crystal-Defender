@@ -104,27 +104,27 @@ scale = Vector2(1.6, 1.6)
 
 [node name="position3" type="Marker2D" parent="Bow"]
 process_mode = 1
-position = Vector2(24, 8)
+position = Vector2(24, 16)
 
 [node name="position2" type="Marker2D" parent="Bow"]
 process_mode = 1
-position = Vector2(32, 0)
+position = Vector2(40, 0)
 
 [node name="position1" type="Marker2D" parent="Bow"]
 process_mode = 1
-position = Vector2(24, -8)
+position = Vector2(24, -16)
 
 [node name="direction1" type="Marker2D" parent="Bow"]
 process_mode = 1
-position = Vector2(64, -10)
+position = Vector2(64, -16)
 
 [node name="direction2" type="Marker2D" parent="Bow"]
 process_mode = 1
-position = Vector2(74, 0)
+position = Vector2(80, 0)
 
 [node name="direction3" type="Marker2D" parent="Bow"]
 process_mode = 1
-position = Vector2(64, 10)
+position = Vector2(64, 16)
 
 [node name="CoinFlip" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_dv6ct")

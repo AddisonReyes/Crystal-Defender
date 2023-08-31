@@ -12,9 +12,9 @@ var crystal
 var healthBar
 
 #Atributes
-var damage = 25
-var fireRate = 0.6
-var maxHealth = 100
+var damage = 18
+var fireRate = 0.66
+var maxHealth = 60
 var health = maxHealth
 
 const PIXELS_TO_MOVE = 1.6
@@ -148,7 +148,7 @@ func shoot():
 		var positions = [$Bow/position1.global_position, $Bow/position2.global_position, $Bow/position3.global_position]
 		var directions = [$Bow/direction1.global_position, $Bow/direction2.global_position, $Bow/direction3.global_position]
 		
-		var frozenArrowInst = ArrowPath.instantiate()
+		var frozenArrowInst = FrozenArrowPath.instantiate()
 		var arrowInst = ArrowPath.instantiate()
 		
 		for i in range(3):

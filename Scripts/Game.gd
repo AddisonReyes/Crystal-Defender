@@ -1,6 +1,11 @@
 extends Node2D
 
 
+var rng = RandomNumberGenerator.new()
+
+const cubePath = preload("res://Scenes/Cube.tscn")
+var cube = cubePath.instantiate()
+
 var clockStarted = false
 var firstRun = true
 
@@ -51,9 +56,26 @@ func _on_tree_entered():
 func _on_play_timer_timeout():
 	timePlayed += 1
 	
-	if timePlayed % 60 == 0:
+	if timePlayed == 150:
+		$Spawner.twoSpawners = true
+	
+	if timePlayed % 66 == 0:
 		$Spawner.add_difficulty()
 		$Spawner.add_enemy()
+	
+	if timePlayed % 320 == 0:
+		var spawnNum = rng.randi_range(0, 1)
+		var item
+		
+		if spawnNum == 0:
+			item = cube.duplicate()
+			item.position = $CubePositions/Marker1.global_position
+			add_child(item)
+		
+		if spawnNum == 1:
+			item = cube.duplicate()
+			item.position = $CubePositions/Marker2.global_position
+			add_child(item)
 	
 	$PlayTimer.start()
 

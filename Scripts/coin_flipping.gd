@@ -45,8 +45,8 @@ func _ready():
 	
 	if fortune == 5:
 		$Label.text = "The Goddess of Fortune has given more life to your crystal."
-		crystal.maxHealth += 500
-		crystal.health += 500
+		crystal.maxHealth += 260
+		crystal.health += 260
 	
 	if fortune == 6:
 		$Label.text = "The Goddess of Fortune has decreased the enemy spawn rate."

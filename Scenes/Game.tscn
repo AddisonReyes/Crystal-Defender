@@ -67,6 +67,14 @@ size = Vector2(44, 456)
 process_mode = 3
 script = ExtResource("1_ye4ex")
 
+[node name="CubePositions" type="Node2D" parent="."]
+
+[node name="Marker1" type="Marker2D" parent="CubePositions"]
+position = Vector2(-704, 616)
+
+[node name="Marker2" type="Marker2D" parent="CubePositions"]
+position = Vector2(704, 616)
+
 [node name="Background" parent="." instance=ExtResource("1_q5s2u")]
 process_mode = 1
 position = Vector2(0, 271)

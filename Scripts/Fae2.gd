@@ -26,7 +26,7 @@ var state = "Walk"
 var alive = true
 
 var enemyFrozed = false
-var item_drop = 0.25
+var item_drop = 0.2
 var canAttack = false
 var attackCooldown = true
 
@@ -126,14 +126,17 @@ func death():
 	
 	var num = rng.randf_range(0.0, 1.0)
 	if num < item_drop:
-		var itemNum = rng.randi_range(0, 5)
+		var itemNum = rng.randi_range(0, 2)
 		var new_item
 		
 		if itemNum == 0:
-			new_item = HeartPath.instantiate()
+			var heartNum = rng.randf_range(0.0, 1.0)
 			
-		elif itemNum == 1:
-			new_item = CrystalPath.instantiate()
+			if heartNum <= 0.4:
+				new_item = CrystalPath.instantiate()
+			
+			else:
+				new_item = HeartPath.instantiate()
 			
 		else:
 			new_item = CoinPath.instantiate()
