@@ -254,17 +254,17 @@ func _player_movement():
 
 
 func update_health():
-	healthBar.max_value = maxHealth
+	#healthBar.max_value = maxHealth
 	if health >= maxHealth:
 		health = maxHealth
 		
-	healthBar.value = health
+	#healthBar.value = health
 	
-	if health >= maxHealth:
-		healthBar.visible = false
+	#if health >= maxHealth:
+		#healthBar.visible = false
 	
-	else:
-		healthBar.visible = true
+	#else:
+		#healthBar.visible = true
 
 
 func _on_heal_timer_timeout():

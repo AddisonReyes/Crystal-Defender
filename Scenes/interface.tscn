@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnvd2hej1w33x"]
+[gd_scene load_steps=7 format=3 uid="uid://bnvd2hej1w33x"]
 
 [ext_resource type="Script" path="res://Scripts/interface.gd" id="1_00gvf"]
 [ext_resource type="Texture2D" uid="uid://d1gd3h7ym01tt" path="res://Sprites/texture.png" id="1_r2wo8"]
 [ext_resource type="Texture2D" uid="uid://dbfi23pwfur4n" path="res://Sprites/Coin1.png" id="2_7nalu"]
+[ext_resource type="PackedScene" uid="uid://drovcm3okgc1h" path="res://Sprites/AnikahFace.aseprite" id="2_ancc8"]
 [ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="3_aaosi"]
 [ext_resource type="AudioStream" uid="uid://jrw3fq03011b" path="res://Audio/clickButtom.wav" id="5_ykx50"]
 
 [node name="Interface" type="Control"]
+light_mask = 524289
+visibility_layer = 524289
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,10 +20,10 @@ script = ExtResource("1_00gvf")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 30.0
-offset_right = 248.0
-offset_bottom = 94.0
+offset_left = 194.0
+offset_top = 60.0
+offset_right = 336.0
+offset_bottom = 98.0
 texture = ExtResource("1_r2wo8")
 
 [node name="TextureRect" type="TextureRect" parent="NinePatchRect"]
@@ -28,29 +31,86 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
+offset_left = -14.0
 offset_top = -30.5
-offset_right = 64.0
+offset_right = 50.0
 offset_bottom = 30.5
 grow_vertical = 2
 texture = ExtResource("2_7nalu")
 
 [node name="Label" type="Label" parent="NinePatchRect"]
+modulate = Color(1, 0.654902, 0.992157, 1)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -162.0
-offset_top = -50.5
-offset_bottom = 50.5
+offset_left = -88.0
+offset_top = -30.0
+offset_right = -4.0
+offset_bottom = 36.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_aaosi")
-theme_override_font_sizes/font_size = 66
+theme_override_font_sizes/font_size = 46
 text = "999"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 112.0
+offset_right = 644.0
+offset_bottom = 168.0
+texture = ExtResource("1_r2wo8")
+
+[node name="PlayerBar" type="ProgressBar" parent="NinePatchRect2"]
+process_mode = 1
+modulate = Color(0.447059, 1, 0.47451, 1)
+light_mask = 524289
+visibility_layer = 524289
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -299.5
+offset_top = -24.0
+offset_right = 299.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+
+[node name="Label" type="Label" parent="NinePatchRect2"]
+process_mode = 1
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -23.5
+offset_right = 161.5
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_aaosi")
+theme_override_font_sizes/font_size = 46
+text = "99999 / 99999"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AnikahFace" parent="." instance=ExtResource("2_ancc8")]
+position = Vector2(90, 84)
+rotation = -0.10472
+scale = Vector2(1.6, 1.6)
+flip_h = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0

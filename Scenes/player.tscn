@@ -66,6 +66,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 process_mode = 1
+visible = false
 modulate = Color(0.447059, 1, 0.47451, 1)
 offset_left = -41.0
 offset_top = -53.0
