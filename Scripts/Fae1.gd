@@ -25,7 +25,7 @@ var state = "Walk"
 var alive = true
 
 var enemyFrozed = false
-var item_drop = 0.2
+var item_drop = 0.3
 var canAttack = false
 var attackCooldown = true
 

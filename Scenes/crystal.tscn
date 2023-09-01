@@ -29,6 +29,7 @@ shape = SubResource("RectangleShape2D_5uybs")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 process_mode = 1
+visible = false
 modulate = Color(0.447059, 1, 0.47451, 1)
 offset_left = -160.0
 offset_top = -133.333
@@ -39,7 +40,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="HealthBar"]
 process_mode = 1
-layout_mode = 0
 offset_left = 5.33333
 offset_top = -21.0
 offset_right = 198.333

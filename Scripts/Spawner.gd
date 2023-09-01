@@ -41,8 +41,8 @@ func update_spawn_rate():
 
 
 func add_difficulty():
-	dificultyAdded += 10
-	spawnRate -= 0.025
+	dificultyAdded += 6
+	spawnRate -= 0.016
 
 
 func add_enemy():

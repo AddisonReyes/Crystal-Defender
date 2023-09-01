@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnvd2hej1w33x"]
+[gd_scene load_steps=8 format=3 uid="uid://bnvd2hej1w33x"]
 
 [ext_resource type="Script" path="res://Scripts/interface.gd" id="1_00gvf"]
 [ext_resource type="Texture2D" uid="uid://d1gd3h7ym01tt" path="res://Sprites/texture.png" id="1_r2wo8"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://drovcm3okgc1h" path="res://Sprites/AnikahFace.aseprite" id="2_ancc8"]
 [ext_resource type="FontFile" uid="uid://cladihgs0vay4" path="res://Fonts/alagard.ttf" id="3_aaosi"]
 [ext_resource type="AudioStream" uid="uid://jrw3fq03011b" path="res://Audio/clickButtom.wav" id="5_ykx50"]
+[ext_resource type="PackedScene" uid="uid://e42fmrqn5kup" path="res://Sprites/PlayerCristal.aseprite" id="6_j2f3o"]
 
 [node name="Interface" type="Control"]
 light_mask = 524289
@@ -20,10 +21,10 @@ script = ExtResource("1_00gvf")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_left = 194.0
-offset_top = 60.0
-offset_right = 336.0
-offset_bottom = 98.0
+offset_left = 592.0
+offset_top = 117.0
+offset_right = 734.0
+offset_bottom = 157.0
 texture = ExtResource("1_r2wo8")
 
 [node name="TextureRect" type="TextureRect" parent="NinePatchRect"]
@@ -60,9 +61,9 @@ vertical_alignment = 1
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_left = 39.0
+offset_left = 96.0
 offset_top = 112.0
-offset_right = 644.0
+offset_right = 568.0
 offset_bottom = 168.0
 texture = ExtResource("1_r2wo8")
 
@@ -77,9 +78,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -299.5
+offset_left = -228.0
 offset_top = -24.0
-offset_right = 299.5
+offset_right = 232.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -106,10 +107,62 @@ text = "99999 / 99999"
 horizontal_alignment = 1
 vertical_alignment = 2
 
+[node name="NinePatchRect3" type="NinePatchRect" parent="."]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 792.0
+offset_bottom = 96.0
+texture = ExtResource("1_r2wo8")
+
+[node name="PlayerBar" type="ProgressBar" parent="NinePatchRect3"]
+process_mode = 1
+modulate = Color(0.447059, 1, 0.47451, 1)
+light_mask = 524289
+visibility_layer = 524289
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -24.0
+offset_right = 372.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+
+[node name="Label" type="Label" parent="NinePatchRect3"]
+process_mode = 1
+modulate = Color(1, 0.654902, 0.992157, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.5
+offset_top = -23.5
+offset_right = 161.5
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_aaosi")
+theme_override_font_sizes/font_size = 46
+text = "999999 / 999999"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="PlayerCristal" parent="." instance=ExtResource("6_j2f3o")]
+position = Vector2(46, 72)
+scale = Vector2(2, 2)
+
 [node name="AnikahFace" parent="." instance=ExtResource("2_ancc8")]
-position = Vector2(90, 84)
+position = Vector2(64, 144)
 rotation = -0.10472
-scale = Vector2(1.6, 1.6)
+scale = Vector2(1.2, 1.2)
 flip_h = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
