@@ -56,7 +56,7 @@ func _on_tree_entered():
 func _on_play_timer_timeout():
 	timePlayed += 1
 	
-	if timePlayed == 150:
+	if timePlayed == 160:
 		$Spawner.twoSpawners = true
 	
 	if timePlayed % 66 == 0:

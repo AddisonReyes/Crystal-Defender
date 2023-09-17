@@ -93,6 +93,7 @@ vertical_icon_alignment = 0
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("4_v7djn")
+volume_db = -16.0
 
 [node name="Fae3" parent="." instance=ExtResource("6_wmc0n")]
 position = Vector2(216, 344)

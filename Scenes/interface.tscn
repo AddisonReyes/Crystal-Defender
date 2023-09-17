@@ -189,5 +189,6 @@ vertical_icon_alignment = 0
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("5_ykx50")
+volume_db = -16.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Pause" to="." method="_on_pause_pressed"]

@@ -6,7 +6,7 @@ class_name Crystal
 var healthBar
 
 #Atributes
-var maxHealth = 600
+var maxHealth = 1000
 var health = maxHealth
 
 var alive = true

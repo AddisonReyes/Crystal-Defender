@@ -49,6 +49,7 @@ vertical_icon_alignment = 0
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("4_ub66y")
+volume_db = -16.0
 
 [node name="Controls" type="Label" parent="."]
 modulate = Color(1, 0.654902, 0.992157, 1)

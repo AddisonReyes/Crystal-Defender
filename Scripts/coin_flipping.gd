@@ -105,8 +105,8 @@ func _ready():
 	
 	if fortune == 15:
 		$Label.text = "Your luck has increased!"
-		multiShotProbability += 0.0006
-		coldBowProbability += 0.0006
+		multiShotProbability += 0.0016
+		coldBowProbability += 0.0016
 
 
 func _physics_process(delta):

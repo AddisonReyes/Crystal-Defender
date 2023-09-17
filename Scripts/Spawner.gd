@@ -25,7 +25,7 @@ var fortuneFae_inst = fortuneFae.instantiate()
 
 var dificultyAdded = -5
 var enemiesSpawn = 0
-var spawnRate = 5
+var spawnRate = 5.6
 
 var twoSpawners = false
 
@@ -41,7 +41,7 @@ func update_spawn_rate():
 
 
 func add_difficulty():
-	dificultyAdded += 6
+	dificultyAdded += rng.randi_range(5, 10)
 	spawnRate -= 0.016
 
 

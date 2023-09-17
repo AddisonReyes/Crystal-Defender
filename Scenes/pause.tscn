@@ -78,6 +78,7 @@ vertical_icon_alignment = 0
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("3_kepkv")
+volume_db = -16.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]

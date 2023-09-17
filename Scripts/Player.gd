@@ -14,7 +14,7 @@ var healthBar
 #Atributes
 var damage = 18
 var fireRate = 0.66
-var maxHealth = 60
+var maxHealth = 100
 var health = maxHealth
 
 const PIXELS_TO_MOVE = 1.6
